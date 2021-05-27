@@ -33,22 +33,20 @@ class MY_Model extends CI_Model
     return $query->result();; //descarga una fila con los datos del id recibido
   }
 
-  function update($to_save,$id){
-    unset($to_save['id']);//truncar el array de valores para eliminar el id
-    $this->db->where($this->primary_key, $id);
+  function update($to_save,$identificador, $valor){
+    $this->db->where($identificador, $valor);
     $this->db->update($this->table, $to_save);
+  }
+  
+  function delete($identificador,$valor){
+    $respuesta = $this->db->delete($this->table, array($identificador => $valor)); 
+    return $respuesta;
   }
 
   function insert($to_save){
     $this->db->insert($this->table, $to_save);
     return $this->db->insert_id();
   }
-  
-  function delete($id){ 
-    return $this->db->delete($this->table, array($this->primary_key => $id)); 
-  }
-
-  
 }
 
 /* End of file MY_Model.php */
