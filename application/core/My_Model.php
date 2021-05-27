@@ -44,9 +44,8 @@ class MY_Model extends CI_Model
     return $this->db->insert_id();
   }
   
-  function delete($identificador,$valor){
-    $respuesta = $this->db->delete($this->table, array($identificador => $valor)); 
-    return $respuesta;
+  function delete($id){ 
+    return $this->db->delete($this->table, array($this->primary_key => $id)); 
   }
 
   
