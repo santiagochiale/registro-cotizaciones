@@ -38,9 +38,8 @@ class MY_Model extends CI_Model
     $this->db->update($this->table, $to_save);
   }
   
-  function delete($identificador,$valor){
-    $respuesta = $this->db->delete($this->table, array($identificador => $valor)); 
-    return $respuesta;
+  function delete($id){ 
+    return $this->db->delete($this->table, array($this->primary_key => $id)); 
   }
 
   function insert($to_save){
