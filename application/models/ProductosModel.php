@@ -12,5 +12,6 @@ class ProductosModel extends MY_Model{
   );
 
   
+  
 
 }
