@@ -72,12 +72,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $active_group = 'default';
 $query_builder = TRUE;
-
+//ubkm21192
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'root',
-	'password' => 'ubkm21192',
+	'password' => '', 
 	'database' => 'registrocotizaciones',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

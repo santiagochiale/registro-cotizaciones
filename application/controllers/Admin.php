@@ -94,7 +94,9 @@ class Admin extends CI_Controller{
   }
 
   public function guardar_registro(){ //metodo para insertar o actualizar dispositivos
-   
+    //forma: {"id":"26","modelo":"ProductosModel","valores":[{"descripcion_producto":"tarjetas nuevas","id_grupo":"2","cod_sap":"0000"}]}
+      $id=null; //se asume id como null (si es asi es una inserción de un registro)
+
     //con el siguiente if se evalua si el metodo guardar_proceso recibio algun dato del formulario de la pagina o simplemente fue llamado para cargar la vista
       if(!$_POST){
         echo "no se recibieron datos de la petición";
@@ -106,51 +108,34 @@ class Admin extends CI_Controller{
 
         if(!empty($json['valores'])){
           $valores = $json['valores'][0];
-          //var_dump($valores);
-          //die();
+          if(isset($valores['id'])){
+            $id = $valores['id']; 
+          };
         }else{
           echo "No se recibieron valores para guardar en la BD";
-          //die();
         }
+        //se establecen los datos a validar
+
+        $this->form_validation->set_data($valores);
+
         //lo proximo es establecer las reglas de validación para cada campo
 
-        //var_dump($this->$modelo->array_validacion);
-        //die();
-
-        $reglas = $this->$modelo->array_validacion;
+        $reglas = $this->$modelo->array_validacion; //se traen las reglas de validación desde el modelo
         foreach ( $reglas as $regla) {
-          /*echo $regla['id'];
-          echo $regla['label'];
-          echo $regla['parametros'];*/
           $this->form_validation->set_rules($regla['id'],$regla['label'],$regla['parametros']);
         }
 
-        
-
         if($this->form_validation->run()){
           //en este punto nuestro formulario es valido
-          $data['validation_errors'] = "registroInsertado";
-          /*echo "registro validado";
-          die();*/
-          //el siguiente array es el que se guardara en la base de datos 
-          /*$to_save = array(
-            'nombre_maquina' => $this->input->post("nombre_maquina"),
-            'id_proceso' => $this->input->post("id_proceso"),
-            'uph_esperado' => $this->input->post("uph_esperado")
-          );
-          //print_r($to_save);
-          if($id_maquina==null){ //se evalua si es un registro nvo o un update y se direcciona al metodo que corresponda
+          if($id==null){ //se evalua si es un registro nvo o un update y se direcciona al metodo que corresponda
             //print_r($to_save);
-            $this->Maquina->insert($to_save);//se llama al modelo donde se especifica la tabla donde insertar los datos. Esta clase extiende de CI_Model en donde creamos los metodos del CRUD (entre ellos el insert)
+            $this->$modelo->insert($valores);//se llama al modelo donde se especifica la tabla donde insertar los datos. Esta clase extiende de CI_Model en donde creamos los metodos del CRUD (entre ellos el insert)
             $data['validation_errors'] = "registroInsertado";
           }else{
-            $identificador='id_maquina';
-            $valor = $id_maquina;
-            //print_r($to_save);
-            $this->Maquina->update($to_save,$identificador, $valor);
+            $this->$modelo->update($valores,$id);
             $data['validation_errors'] = "registroModificado";
           }
-          */
+          
         }else{
           $data['validation_errors'] = validation_errors();
           //TODO: clasificar errores para mostrar que validación fallo
