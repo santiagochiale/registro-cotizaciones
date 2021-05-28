@@ -113,7 +113,7 @@ class Crud extends CI_Controller
                 'message_error'     => '',
                 'data'              => '',
                 'validation_errors' => 'Registro Insertado'
-              );
+              ); //TODO: agregar craeted_at
             } else {
               $data = array(
                 'status'            => 'error',
@@ -135,7 +135,7 @@ class Crud extends CI_Controller
                 'message_error'     => '',
                 'data'              => '',
                 'validation_errors' => 'Registro modificado'
-              );
+              );//TODO: agregar updated_at y ultimo usuario que realizo cambios
             } else {
               $data = array(
                 'status'            => 'error',
