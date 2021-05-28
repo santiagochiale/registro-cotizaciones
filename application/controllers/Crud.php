@@ -28,7 +28,7 @@ class Crud extends CI_Controller
 
     //Carga de modelos
     $this->load->model("ClientesModel");
-    $this->load->model('EmpresasModel');  
+    $this->load->model('EmpresasModel');
     $this->load->model("EstadoCotizacionModel");
     $this->load->model("EstadoOcModel");
     $this->load->model("EstadoProduccionModel");
@@ -36,7 +36,6 @@ class Crud extends CI_Controller
     $this->load->model("MonedasModel");
     $this->load->model("ProductosModel");
     $this->load->model("RegistroCotizacionesModel");
-
   }
   //****************************************************METODOS DE PRUEBA*****************************************************************
 
@@ -70,16 +69,16 @@ class Crud extends CI_Controller
     //con el siguiente if se evalua si el metodo guardar_proceso recibio algun dato del formulario de la pagina o simplemente fue llamado para cargar la vista
     if (!$_POST) {
       $data = array(
-                    'status'          => 'error',
-                    'code'            => 403,
-                    'message_error'   => 'Error en el metodo de petición', 
-                    'data'            => ''
+        'status'          => 'error',
+        'code'            => 403,
+        'message_error'   => 'Error en el metodo de petición',
+        'data'            => ''
       );
       $dataJ = json_encode($data);
       if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un return
-      echo $dataJ;
+        echo $dataJ;
       } else {
-      echo $dataJ;
+        echo $dataJ;
       }
       return;
     } else {
@@ -107,21 +106,21 @@ class Crud extends CI_Controller
           //en este punto nuestro formulario es valido
           if ($id == null) { //se evalua si es un registro nvo o un update y se direcciona al metodo que corresponda
             //print_r($to_save);
-            if($this->$modelo->insert($valores)){//se llama al modelo donde se especifica la tabla donde insertar los datos. Esta clase extiende de CI_Model en donde creamos los metodos del CRUD (entre ellos el insert)
+            if ($this->$modelo->insert($valores)) { //se llama al modelo donde se especifica la tabla donde insertar los datos. Esta clase extiende de CI_Model en donde creamos los metodos del CRUD (entre ellos el insert)
               $data = array(
-                            'status'            => 'success',
-                            'code'              => 200,
-                            'message_error'     => '', 
-                            'data'              => '',
-                            'validation_errors' => 'Registro Insertado'
+                'status'            => 'success',
+                'code'              => 200,
+                'message_error'     => '',
+                'data'              => '',
+                'validation_errors' => 'Registro Insertado'
               );
-            }else{
+            } else {
               $data = array(
-                            'status'            => 'error',
-                            'code'              => 500,
-                            'message_error'     => 'Error al insertar el registro', 
-                            'data'              => '',
-                            'validation_errors' => 'Error al insertar el registro'
+                'status'            => 'error',
+                'code'              => 500,
+                'message_error'     => 'Error al insertar el registro',
+                'data'              => '',
+                'validation_errors' => 'Error al insertar el registro'
               );
             }
           } else {
@@ -129,31 +128,31 @@ class Crud extends CI_Controller
               'id' => $valores['id']
             );
             $count = $this->$modelo->find($filtros); //se evalua si el id existe en la bd
-            if(!empty($count) && $this->$modelo->update($valores, $id)){
+            if (!empty($count) && $this->$modelo->update($valores, $id)) {
               $data = array(
-                          'status'            => 'success',
-                          'code'              => 200,
-                          'message_error'     => '', 
-                          'data'              => '',
-                          'validation_errors' => 'Registro modificado'
+                'status'            => 'success',
+                'code'              => 200,
+                'message_error'     => '',
+                'data'              => '',
+                'validation_errors' => 'Registro modificado'
               );
-            }else{
+            } else {
               $data = array(
-                          'status'            => 'error',
-                          'code'              => 500,
-                          'message_error'     => 'Error al modificar el registro', 
-                          'data'              => '',
-                          'validation_errors' => 'Error al modificar el registro'
+                'status'            => 'error',
+                'code'              => 500,
+                'message_error'     => 'Error al modificar el registro',
+                'data'              => '',
+                'validation_errors' => 'Error al modificar el registro'
               );
             }
           }
         } else {
           $data = array(
-                      'status'            => 'error',
-                      'code'              => 500,
-                      'message_error'     => 'Error de validación', 
-                      'data'              => '',
-                      'validation_errors' => validation_errors()
+            'status'            => 'error',
+            'code'              => 500,
+            'message_error'     => 'Error de validación',
+            'data'              => '',
+            'validation_errors' => validation_errors()
           );
           //TODO: clasificar errores para mostrar que validación fallo
         }
@@ -165,16 +164,16 @@ class Crud extends CI_Controller
         }
       } else {
         $data = array(
-                      'status'          => 'error',
-                      'code'            => 400,
-                      'message_error'   => 'Error en el formato de la petición', 
-                      'data'            => ''
+          'status'          => 'error',
+          'code'            => 400,
+          'message_error'   => 'Error en el formato de la petición',
+          'data'            => ''
         );
         $dataJ = json_encode($data);
         if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un return
-        echo $dataJ;
+          echo $dataJ;
         } else {
-        echo $dataJ;
+          echo $dataJ;
         }
       }
     }
@@ -186,10 +185,10 @@ class Crud extends CI_Controller
     //forma de envio: {"modelo":"ClientesModel","filtros":[{"id":"2"}]}
     if (!$_POST) {
       $data = array(
-                    'status'          => 'error',
-                    'code'            => 403,
-                    'message_error'   => 'Error en el metodo de petición', 
-                    'data'            => ''
+        'status'          => 'error',
+        'code'            => 403,
+        'message_error'   => 'Error en el metodo de petición',
+        'data'            => ''
       );
       $dataJ = json_encode($data);
       if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un return
@@ -207,13 +206,13 @@ class Crud extends CI_Controller
       } else {
         $filtros = array();
       }
-      $respuesta['payload'] = $this->$modelo->find($filtros);//TODO: evaluar si esta sentencia arraja error
+      $respuesta['payload'] = $this->$modelo->find($filtros); //TODO: evaluar si esta sentencia arraja error
 
       $data = array(
-                    'status'          => 'success',
-                    'code'            => 200,
-                    'message_error'   => '', 
-                    'data'            => $respuesta['payload']
+        'status'          => 'success',
+        'code'            => 200,
+        'message_error'   => '',
+        'data'            => $respuesta['payload']
       );
 
 
@@ -226,16 +225,16 @@ class Crud extends CI_Controller
       }
     } else {
       $data = array(
-                    'status'          => 'error',
-                    'code'            => 400,
-                    'message_error'   => 'Error en el formato de la petición', 
-                    'data'            => ''
-                  );
+        'status'          => 'error',
+        'code'            => 400,
+        'message_error'   => 'Error en el formato de la petición',
+        'data'            => ''
+      );
       $dataJ = json_encode($data);
       if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un return
-      echo $dataJ;
+        echo $dataJ;
       } else {
-      echo $dataJ;
+        echo $dataJ;
       }
     }
   }
@@ -245,10 +244,10 @@ class Crud extends CI_Controller
     //TODO: redireccionar a auth si no hay sesion inicial
     if (!$_POST) {
       $data = array(
-                    'status'          => 'error',
-                    'code'            => 403,
-                    'message_error'   => 'Error en el metodo de petición', 
-                    'data'            => ''
+        'status'          => 'error',
+        'code'            => 403,
+        'message_error'   => 'Error en el metodo de petición',
+        'data'            => ''
       );
       $dataJ = json_encode($data);
       if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un return
@@ -264,27 +263,27 @@ class Crud extends CI_Controller
         $valores = $json['valores'][0];
 
         $filtros = array(
-                          'id' => $valores['id']
+          'id' => $valores['id']
         );
         $count = $this->$modelo->find($filtros); //se evalua si el id existe en la bd
-        
-        if(!empty($this->$modelo->find($filtros))){
+
+        if (!empty($this->$modelo->find($filtros))) {
           $respuesta['payload'] = $this->$modelo->delete($valores['id']);
           $data = array(
-                        'status'          => 'success',
-                        'code'            => 200,
-                        'message_error'   => '', 
-                        'data'            => $respuesta['payload']
+            'status'          => 'success',
+            'code'            => 200,
+            'message_error'   => '',
+            'data'            => $respuesta['payload']
           );
-        }else{
+        } else {
           $data = array(
-                      'status'          => 'error',
-                      'code'            => 404,
-                      'message_error'   => 'El registro no existe en la BD', 
-                      'data'            => ''
+            'status'          => 'error',
+            'code'            => 404,
+            'message_error'   => 'El registro no existe en la BD',
+            'data'            => ''
           );
         }
-       
+
 
         $dataJ = json_encode($data);
         if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un return
@@ -296,14 +295,14 @@ class Crud extends CI_Controller
         $data = array(
           'status'          => 'error',
           'code'            => 400,
-          'message_error'   => 'Error en el formato de la petición', 
+          'message_error'   => 'Error en el formato de la petición',
           'data'            => ''
         );
         $dataJ = json_encode($data);
         if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un return
-        echo $dataJ;
+          echo $dataJ;
         } else {
-        echo $dataJ;
+          echo $dataJ;
         }
       }
     }

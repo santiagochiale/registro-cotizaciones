@@ -63,29 +63,32 @@ class Auth extends CI_Controller {
             echo '</pre>';*/
             if($rules->run() && $user_info['error']=="") {
                 // Login WIN!
-                $view["contenido"] = $this->load->view("admin/index", NULL, TRUE);
+                $view["contenido"] = null;
                 $view["titulo"] = "Pagina Principal";
                 //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
-                $this->parser->parse("template/body_admin",$view);
+                $this->parser->parse("app/estructura_app",$view);
+                //$this->load->view("app/estructura_app");
                 
             }else {
                 //echo $user_info['error'];
                 // Login FAIL o primera vez que nos logueamos
                 $data['error'] = $user_info['error'];
                 $this->logout($data);
-                /*
-                $view["contenido"] = $this->load->view("admin/login", $data, TRUE);
+                
+                $view["contenido"] = null;
                 //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
-                $this->parser->parse("template/body_login",$view);
-                */
+                $this->parser->parse("app/estructura_app",$view);
+                
 
             }
         }else {
                 // Already logged in...
-                $view["contenido"] = $this->load->view("admin/index", NULL, TRUE);
+                $view["contenido"] = null;
                 $view["titulo"] = "Pagina Principal";
                 //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
-                $this->parser->parse("template/body_admin",$view);
+                $this->parser->parse("app/estructura_app",$view);
+
+                //$this->load->view("app/estructura_app");
         }
     }
 
