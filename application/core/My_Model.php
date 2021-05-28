@@ -33,8 +33,9 @@ class MY_Model extends CI_Model
     return $query->result();; //descarga una fila con los datos del id recibido
   }
 
-  function update($to_save,$identificador, $valor){
-    $this->db->where($identificador, $valor);
+  function update($to_save,$id){
+    unset($to_save['id']);//truncar el array de valores para eliminar el id
+    $this->db->where($this->primary_key, $id);
     $this->db->update($this->table, $to_save);
   }
   

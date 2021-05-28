@@ -4,7 +4,7 @@
 class ProductosModel extends MY_Model{
 
   public $table = "productos";
-  public $primary_key = "id";
+  public $primary_key = "id_producto";
   public $id = "id_producto";
 
   public $joins = array(
