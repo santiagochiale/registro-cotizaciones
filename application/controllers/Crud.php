@@ -28,9 +28,14 @@ class Crud extends CI_Controller
 
     //Carga de modelos
     $this->load->model("ClientesModel");
+    $this->load->model('EmpresasModel');  
+    $this->load->model("EstadoCotizacionModel");
+    $this->load->model("EstadoOcModel");
+    $this->load->model("EstadoProduccionModel");
+    $this->load->model("GruposModel");
+    $this->load->model("MonedasModel");
     $this->load->model("ProductosModel");
-
-    //$this->db->join('ordenes', 'clientes.id=ordenes.id_cliente');
+    $this->load->model("RegistroCotizacionesModel");
 
   }
   //****************************************************METODOS DE PRUEBA*****************************************************************
