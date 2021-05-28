@@ -36,7 +36,7 @@ class MY_Model extends CI_Model
   function update($to_save,$id){
     unset($to_save['id']);//truncar el array de valores para eliminar el id
     $this->db->where($this->primary_key, $id);
-    $this->db->update($this->table, $to_save);
+    return $this->db->update($this->table, $to_save);
   }
   
   function delete($id){ 

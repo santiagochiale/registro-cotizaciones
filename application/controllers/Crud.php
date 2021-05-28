@@ -69,7 +69,18 @@ class Crud extends CI_Controller
 
     //con el siguiente if se evalua si el metodo guardar_proceso recibio algun dato del formulario de la pagina o simplemente fue llamado para cargar la vista
     if (!$_POST) {
-      echo "no se recibieron datos de la petición";
+      $data = array(
+                    'status'          => 'error',
+                    'code'            => 403,
+                    'message_error'   => 'Error en el metodo de petición', 
+                    'data'            => ''
+      );
+      $dataJ = json_encode($data);
+      if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un return
+      echo $dataJ;
+      } else {
+      echo $dataJ;
+      }
       return;
     } else {
       //se reciben los datos por json 
@@ -96,15 +107,54 @@ class Crud extends CI_Controller
           //en este punto nuestro formulario es valido
           if ($id == null) { //se evalua si es un registro nvo o un update y se direcciona al metodo que corresponda
             //print_r($to_save);
-            $this->$modelo->insert($valores); //se llama al modelo donde se especifica la tabla donde insertar los datos. Esta clase extiende de CI_Model en donde creamos los metodos del CRUD (entre ellos el insert)
-            $data['validation_errors'] = "registroInsertado";
+            if($this->$modelo->insert($valores)){//se llama al modelo donde se especifica la tabla donde insertar los datos. Esta clase extiende de CI_Model en donde creamos los metodos del CRUD (entre ellos el insert)
+              $data = array(
+                            'status'            => 'success',
+                            'code'              => 200,
+                            'message_error'     => '', 
+                            'data'              => '',
+                            'validation_errors' => 'Registro Insertado'
+              );
+            }else{
+              $data = array(
+                            'status'            => 'error',
+                            'code'              => 500,
+                            'message_error'     => 'Error al insertar el registro', 
+                            'data'              => '',
+                            'validation_errors' => 'Error al insertar el registro'
+              );
+            }
           } else {
-            $this->$modelo->update($valores, $id);
-            $data['validation_errors'] = "registroModificado";
-            //TODO: enviar error si el id a editar no existe
+            $filtros = array(
+              'id' => $valores['id']
+            );
+            $count = $this->$modelo->find($filtros); //se evalua si el id existe en la bd
+            if(!empty($count) && $this->$modelo->update($valores, $id)){
+              $data = array(
+                          'status'            => 'success',
+                          'code'              => 200,
+                          'message_error'     => '', 
+                          'data'              => '',
+                          'validation_errors' => 'Registro modificado'
+              );
+            }else{
+              $data = array(
+                          'status'            => 'error',
+                          'code'              => 500,
+                          'message_error'     => 'Error al modificar el registro', 
+                          'data'              => '',
+                          'validation_errors' => 'Error al modificar el registro'
+              );
+            }
           }
         } else {
-          $data['validation_errors'] = validation_errors();
+          $data = array(
+                      'status'            => 'error',
+                      'code'              => 500,
+                      'message_error'     => 'Error de validación', 
+                      'data'              => '',
+                      'validation_errors' => validation_errors()
+          );
           //TODO: clasificar errores para mostrar que validación fallo
         }
         $dataJ = json_encode($data);
@@ -114,19 +164,39 @@ class Crud extends CI_Controller
           echo $dataJ;
         }
       } else {
-        echo "error en el formato de la petición";
+        $data = array(
+                      'status'          => 'error',
+                      'code'            => 400,
+                      'message_error'   => 'Error en el formato de la petición', 
+                      'data'            => ''
+        );
+        $dataJ = json_encode($data);
+        if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un return
+        echo $dataJ;
+        } else {
+        echo $dataJ;
+        }
       }
     }
   }
-
-
 
   public function encontrar_registro()
   {
     //TODO: redireccionar a auth si no hay sesion inicial
     //forma de envio: {"modelo":"ClientesModel","filtros":[{"id":"2"}]}
     if (!$_POST) {
-      echo "no se recibieron datos de la petición";
+      $data = array(
+                    'status'          => 'error',
+                    'code'            => 403,
+                    'message_error'   => 'Error en el metodo de petición', 
+                    'data'            => ''
+      );
+      $dataJ = json_encode($data);
+      if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un return
+        echo $dataJ;
+      } else {
+        echo $dataJ;
+      }
       return;
     }
     $json = json_decode($_POST['json'], true);
@@ -137,9 +207,17 @@ class Crud extends CI_Controller
       } else {
         $filtros = array();
       }
+      $respuesta['payload'] = $this->$modelo->find($filtros);//TODO: evaluar si esta sentencia arraja error
 
-      $data['data'] = $this->$modelo->find($filtros);
-      //************************************************************************************************************************************* */
+      $data = array(
+                    'status'          => 'success',
+                    'code'            => 200,
+                    'message_error'   => '', 
+                    'data'            => $respuesta['payload']
+      );
+
+
+
       $dataJ = json_encode($data);
       if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un return
         echo $dataJ;
@@ -147,7 +225,18 @@ class Crud extends CI_Controller
         echo $dataJ;
       }
     } else {
-      echo "error en el formato de la petición";
+      $data = array(
+                    'status'          => 'error',
+                    'code'            => 400,
+                    'message_error'   => 'Error en el formato de la petición', 
+                    'data'            => ''
+                  );
+      $dataJ = json_encode($data);
+      if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un return
+      echo $dataJ;
+      } else {
+      echo $dataJ;
+      }
     }
   }
 
@@ -155,17 +244,67 @@ class Crud extends CI_Controller
   {
     //TODO: redireccionar a auth si no hay sesion inicial
     if (!$_POST) {
-      echo "no se recibieron datos de la petición";
+      $data = array(
+                    'status'          => 'error',
+                    'code'            => 403,
+                    'message_error'   => 'Error en el metodo de petición', 
+                    'data'            => ''
+      );
+      $dataJ = json_encode($data);
+      if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un return
+        echo $dataJ;
+      } else {
+        echo $dataJ;
+      }
       return;
     } else {
       $json = json_decode($_POST['json'], true);
       if (isset($json['modelo']) && !empty($json['modelo']) && isset($json['valores'])) {
         $modelo = $json['modelo'];
         $valores = $json['valores'][0];
-        $respuesta = $this->$modelo->delete($valores['id']);
-        echo json_encode($respuesta);
+
+        $filtros = array(
+                          'id' => $valores['id']
+        );
+        $count = $this->$modelo->find($filtros); //se evalua si el id existe en la bd
+        
+        if(!empty($this->$modelo->find($filtros))){
+          $respuesta['payload'] = $this->$modelo->delete($valores['id']);
+          $data = array(
+                        'status'          => 'success',
+                        'code'            => 200,
+                        'message_error'   => '', 
+                        'data'            => $respuesta['payload']
+          );
+        }else{
+          $data = array(
+                      'status'          => 'error',
+                      'code'            => 404,
+                      'message_error'   => 'El registro no existe en la BD', 
+                      'data'            => ''
+          );
+        }
+       
+
+        $dataJ = json_encode($data);
+        if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un return
+          echo $dataJ;
+        } else {
+          echo $dataJ;
+        }
       } else {
-        echo "error en el formato de la petición";
+        $data = array(
+          'status'          => 'error',
+          'code'            => 400,
+          'message_error'   => 'Error en el formato de la petición', 
+          'data'            => ''
+        );
+        $dataJ = json_encode($data);
+        if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un return
+        echo $dataJ;
+        } else {
+        echo $dataJ;
+        }
       }
     }
   }
