@@ -11,7 +11,7 @@ class MY_Model extends CI_Model
 
 
   // -----------------------------------------------------------------------
-  //**********************************************************************CRUD***********************************************************
+  //*********************************************CRUD***********************************************************
 
   function find($filtros){ //esta funcion busca todos los elementos del campo field que coiciden con la condicion de value en ese campo y la fecha $fecha
     $this->db->select(); //selecciona todos los campos de la bd
@@ -46,6 +46,20 @@ class MY_Model extends CI_Model
   function insert($to_save){
     $this->db->insert($this->table, $to_save);
     return $this->db->insert_id();
+  }
+
+  //-----------------------------------METODOS RESUMENES---------------------------------------
+
+  function totalize($field){
+    $this->db->select_sum($field); //selecciona todos los campos de la bd
+    $this->db->from($this->table); //se define la tabla de la cual se van a seleccionar los campos. Esto viene del modelo
+    if(!empty($this->joins)){
+      foreach ($this->joins as $key => $value) {
+        $this->db->join($key, $value);
+      }
+    }
+    $query = $this->db->get(); //se obtienen los datos de  ese id
+    return $query->result();; //descarga una fila con los datos del id recibido
   }
 }
 
