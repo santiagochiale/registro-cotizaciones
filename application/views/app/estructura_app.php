@@ -881,75 +881,91 @@
         <div class="container-fluid">
           <!-- Small boxes (Stat box) -->
           <div class="row">
-            <div class="col-lg-2 col-4">
+            <div class="col-lg-6 col-12">
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h2>Ganadas $<small>--22%</small>
-                  </h2>
-                  <p class="mb-0">Facturación</p>
+                  <h2>Ganadas $<small> 22%</small></h2>
+                  <p class="mb-0">Tarjetas</p>
                   <h3>8.762.000</h3>
+                  <p class="mb-0">Facturación</p>
+                  <div class="row align-items-center"> <!--TODO: justificar ambos h4 separados-->
+                    <h4>USD 2.709.260.2</h4>
+                    <h4>$ 2.709.260.2</h4>
+                  </div>
+                  
                   <p class="mb-0">Cmg</p>
-                  <h4>USD 2.709.260.2<small>--15%</small></h4>
+                  <h4>USD 2.709.260.2<small> 15%</small></h4>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-2 col-4">
+            <div class="col-lg-6 col-12">
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h2>Ganadas u$d<small>--35%</small>
-                  </h2>
+                  <h2>Ganadas u$d<small> 35%</small></h2>
                   <p class="mb-0">Facturación</p>
                   <h3>2.210.400</h3>
                   <p class="mb-0">Cmg</p>
-                  <h4>USD 1.709.737,94<small>--35%</small></h4>
+                  <h4>USD 1.709.737,94<small> 35%</small></h4>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-2 col-4">
+            <div class="col-lg-6 col-12">
               <!-- small box -->
               <div class="small-box bg-warning">
                 <div class="inner">
-                  <h3>44</h3>
-                  <p>En concurso $</p>
+                  <h2>En concurso $<small> 22%</small></h2>
+                  <p class="mb-0">Facturación</p>
+                  <h3>8.762.000</h3>
+                  <p class="mb-0">Cmg</p>
+                  <h4>USD 2.709.260.2<small> 15%</small></h4>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-2 col-4">
+            <div class="col-lg-6 col-12">
               <!-- small box -->
               <div class="small-box bg-warning">
                 <div class="inner">
-                  <h3>65</h3>
-                  <p>En concurso u$d</p>
+                  <h2>En concurso u$d<small> 22%</small></h2>
+                  <p class="mb-0">Facturación</p>
+                  <h3>8.762.000</h3>
+                  <p class="mb-0">Cmg</p>
+                  <h4>USD 2.709.260.2<small> 15%</small></h4>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-2 col-4">
+            <div class="col-lg-6 col-12">
               <!-- small box -->
               <div class="small-box bg-danger">
                 <div class="inner">
-                  <h3>65</h3>
-                  <p>Perdidas $</p>
+                  <h2>Perdidas $<small> 22%</small></h2>
+                  <p class="mb-0">Facturación</p>
+                  <h3>8.762.000</h3>
+                  <p class="mb-0">Cmg</p>
+                  <h4>USD 2.709.260.2<small> 15%</small></h4>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-2 col-4">
+            <div class="col-lg-6 col-12">
               <!-- small box -->
               <div class="small-box bg-danger">
                 <div class="inner">
-                  <h3>65</h3>
-                  <p>Perdidas u$d</p>
+                  <h2>Perdidas u$d<small> 22%</small></h2>
+                  <p class="mb-0">Facturación</p>
+                  <h3>8.762.000</h3>
+                  <p class="mb-0">Cmg</p>
+                  <h4>USD 2.709.260.2<small> 15%</small></h4>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
