@@ -55,7 +55,7 @@
         <li class="nav-item d-none d-sm-inline-block">
           <a href="#" class="nav-link">Ver cotización</a>
         </li>
-        
+
       </ul>
 
       <!-- SEARCH FORM -->
@@ -885,8 +885,12 @@
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h3>150</h3>
-                  <p>Ganadas $</p>
+                  <h2>Ganadas $<small>--22%</small>
+                  </h2>
+                  <p class="mb-0">Facturación</p>
+                  <h3>8.762.000</h3>
+                  <p class="mb-0">Cmg</p>
+                  <h4>USD 2.709.260.2<small>--15%</small></h4>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
@@ -896,8 +900,12 @@
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
-                  <p>Ganadas u$d</p>
+                  <h2>Ganadas u$d<small>--35%</small>
+                  </h2>
+                  <p class="mb-0">Facturación</p>
+                  <h3>2.210.400</h3>
+                  <p class="mb-0">Cmg</p>
+                  <h4>USD 1.709.737,94<small>--35%</small></h4>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
