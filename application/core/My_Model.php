@@ -50,12 +50,20 @@ class MY_Model extends CI_Model
 
   //-----------------------------------METODOS RESUMENES---------------------------------------
 
-  function totalize($field){
+  function totalize($field,$filtros){
     $this->db->select_sum($field); //selecciona todos los campos de la bd
     $this->db->from($this->table); //se define la tabla de la cual se van a seleccionar los campos. Esto viene del modelo
     if(!empty($this->joins)){
       foreach ($this->joins as $key => $value) {
         $this->db->join($key, $value);
+      }
+    }
+    if(!empty($filtros)){
+      foreach ($filtros as $key => $value) {
+        if($key=="id"){
+          $key=$this->id;
+        }
+        $this->db->where($key, $value); 
       }
     }
     $query = $this->db->get(); //se obtienen los datos de  ese id

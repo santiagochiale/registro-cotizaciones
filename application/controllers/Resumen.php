@@ -46,7 +46,7 @@ class Resumen extends CI_Controller
   public function totalizar_registro()
   {
     //TODO: redireccionar a auth si no hay sesion inicial
-    //forma de envio: {"modelo":"ClientesModel","field":"cantidad"}
+    //forma de envio: {"modelo":"RegistroCotizacionesModel","field":"cantidad"}
     if (!$_POST) {
       $data = array(
         'status'          => 'error',
@@ -63,10 +63,16 @@ class Resumen extends CI_Controller
       return;
     }
     $json = json_decode($_POST['json'], true);
-    if (isset($json['modelo']) && !empty($json['modelo']) && isset($json['field'])) {
+    if (isset($json['modelo']) && !empty($json['modelo']) && isset($json['field']) && !empty($json['field'])) {
       $modelo = $json['modelo'];
       $field = $json['field'];
-      $respuesta['payload'] = $this->$modelo->totalize($field); //TODO: evaluar si esta sentencia arraja error
+
+      if (!empty($json['filtros'])) {
+        $filtros = $json['filtros'][0];
+      } else {
+        $filtros = array();
+      }
+      $respuesta['payload'] = $this->$modelo->totalize($field,$filtros); //TODO: evaluar si esta sentencia arraja error
 
       $data = array(
         'status'          => 'success',
