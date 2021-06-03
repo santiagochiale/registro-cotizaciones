@@ -18,6 +18,9 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
   <!-----------------------------------SCRIPTS------------------------------->
 
   <!-- jQuery -->
@@ -31,8 +34,9 @@
   <!-- SweetAlert2-->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!---------------------------------SCRIPTS PROPIOS--------------------------->
+
+  <script src="<?php echo base_url() ?>assets/js/estructura_app.js"></script>
 
 </head>
 
@@ -82,7 +86,7 @@
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                <img src="#" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     Brad Diesel
@@ -98,7 +102,7 @@
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                <img src="#" alt="User Avatar" class="img-size-50 img-circle mr-3">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     John Pierce
@@ -114,7 +118,7 @@
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                <img src="#" alt="User Avatar" class="img-size-50 img-circle mr-3">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     Nora Silvester
@@ -885,17 +889,25 @@
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h2>Ganadas $<small> 22%</small></h2>
+                  <h2>Ganadas $</h2>
                   <p class="mb-0">Tarjetas</p>
                   <h3>8.762.000</h3>
                   <p class="mb-0">Facturación</p>
-                  <div class="row align-items-center"> <!--TODO: justificar ambos h4 separados-->
+                  <div class="align-items-center">
                     <h4>USD 2.709.260.2</h4>
                     <h4>$ 2.709.260.2</h4>
                   </div>
-                  
                   <p class="mb-0">Cmg</p>
-                  <h4>USD 2.709.260.2<small> 15%</small></h4>
+                  <div class="align-items-center">
+                    <h4>USD 2.709.260.2</h4>
+                    <h4>$ 2.709.260.2</h4>
+                    <h5>20%</h5>
+                  </div>
+                </div>
+                <div class="icon">
+                  <i class="font-weight-bolder">
+                    <bold>44%</bold>
+                  </i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
@@ -904,12 +916,26 @@
             <div class="col-lg-6 col-12">
               <!-- small box -->
               <div class="small-box bg-success">
-                <div class="inner">
-                  <h2>Ganadas u$d<small> 35%</small></h2>
+              <div class="inner">
+                  <h2>Ganadas u$d</h2>
+                  <p class="mb-0">Tarjetas</p>
+                  <h3>4.500.000</h3>
                   <p class="mb-0">Facturación</p>
-                  <h3>2.210.400</h3>
+                  <div class="align-items-center">
+                    <h4>USD 2.750.000</h4>
+                    <h4>$ 220.750.000</h4>
+                  </div>
                   <p class="mb-0">Cmg</p>
-                  <h4>USD 1.709.737,94<small> 35%</small></h4>
+                  <div class="align-items-center">
+                    <h4>USD 800.000</h4>
+                    <h4>$ 80.000.000</h4>
+                    <h5>20%</h5>
+                  </div>
+                </div>
+                <div class="icon">
+                  <i>
+                    <bold>60%</bold>
+                  </i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
@@ -1061,6 +1087,9 @@
     <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
-
-
 </html>
+
+<script>
+//console.log('carga archivo php');
+  var base_url = "<?php echo base_url() ?>";
+</script>

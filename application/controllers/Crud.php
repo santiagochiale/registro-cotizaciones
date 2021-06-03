@@ -183,11 +183,14 @@ class Crud extends CI_Controller
   {
     //TODO: redireccionar a auth si no hay sesion inicial
     //forma de envio: {"modelo":"ClientesModel","filtros":[{"id":"2"}]}
+    //var_dump($_POST);
+    //die();
+
     if (!$_POST) {
       $data = array(
         'status'          => 'error',
         'code'            => 403,
-        'message_error'   => 'Error en el metodo de petición',
+        'message_error'   => 'Error en el metodo de petición no entra al if del post',
         'data'            => ''
       );
       $dataJ = json_encode($data);
@@ -198,11 +201,15 @@ class Crud extends CI_Controller
       }
       return;
     }
-    $json = json_decode($_POST['json'], true);
+    $json = json_decode($_POST['json'],true);
+    /*var_dump($this->input->post(null, true));
+    var_dump($this->input->post(null, false));
+    die();*/
+
     if (isset($json['modelo']) && !empty($json['modelo']) && isset($json['filtros'])) {
       $modelo = $json['modelo'];
       if (!empty($json['filtros'])) {
-        $filtros = $json['filtros'][0];
+        $filtros = $json['filtros'];
       } else {
         $filtros = array();
       }
@@ -214,8 +221,6 @@ class Crud extends CI_Controller
         'message_error'   => '',
         'data'            => $respuesta['payload']
       );
-
-
 
       $dataJ = json_encode($data);
       if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un return
