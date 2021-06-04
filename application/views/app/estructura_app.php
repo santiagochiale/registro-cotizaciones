@@ -3,41 +3,83 @@
 
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><?php echo APP_NAME . ' | ' . APP_DESCRIPTION ?></title>
-  <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/admin/all.min.css">
+  <title>Registro de Cotizaciones | Unitec Blue</title>
 
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/admin/adminlte.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/summernote/summernote-bs4.min.css">
 
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-  <!-----------------------------------SCRIPTS------------------------------->
+  <!----------------------------------------------SCRIPTS--------------------------------------------------->
 
   <!-- jQuery -->
-  <script src="<?php echo base_url() ?>assets/js/jquery.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/plugins/jquery/jquery.min.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="<?php echo base_url(); ?>/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script>
+    $.widget.bridge('uibutton', $.ui.button)
+  </script>
   <!-- Bootstrap 4 -->
-  <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
-
+  <script src="<?php echo base_url(); ?>/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- ChartJS -->
+  <script src="<?php echo base_url(); ?>/assets/plugins/chart.js/Chart.min.js"></script>
+  <!-- Sparkline 
+  <script src="<?php echo base_url(); ?>/assets/plugins/sparklines/sparkline.js"></script>-->
+  <!-- JQVMap -->
+  <script src="<?php echo base_url(); ?>/assets/plugins/jqvmap/jquery.vmap.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="<?php echo base_url(); ?>/assets/plugins/jquery-knob/jquery.knob.min.js"></script>
+  <!-- daterangepicker -->
+  <script src="<?php echo base_url(); ?>/assets/plugins/moment/moment.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="<?php echo base_url(); ?>/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <!-- Summernote -->
+  <script src="<?php echo base_url(); ?>/assets/plugins/summernote/summernote-bs4.min.js"></script>
+  <!-- overlayScrollbars -->
+  <script src="<?php echo base_url(); ?>/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
   <!-- AdminLTE App -->
-  <script src="<?php echo base_url() ?>assets/js/admin/adminlte.min.js"></script>
-
-  <!-- SweetAlert2-->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-
-  <!---------------------------------SCRIPTS PROPIOS--------------------------->
-
-  <script src="<?php echo base_url() ?>assets/js/estructura_app.js"></script>
-
+  <script src="<?php echo base_url(); ?>/assets/dist/js/adminlte.js"></script>
+  <!-- AdminLTE for demo purposes 
+  <script src="<?php echo base_url(); ?>/assets/dist/js/demo.js"></script> -->
+  <!-- AdminLTE dashboard demo (This is only for demo purposes) 
+  <script src="<?php echo base_url(); ?>/assets/dist/js/pages/dashboard.js"></script>-->
+  <!-- DataTables  & Plugins -->
+  <script src="<?php echo base_url(); ?>/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/plugins/jszip/jszip.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/plugins/pdfmake/pdfmake.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/plugins/pdfmake/vfs_fonts.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -51,13 +93,13 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="index3.html" class="nav-link">Home</a>
+          <a href="<?php echo base_url() ?>develadmin/index" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
           <a href="#" class="nav-link">Agregar cotización</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Ver cotización</a>
+          <a href="<?php echo base_url() ?>develadmin/productos" class="nav-link">Ver cotización</a>
         </li>
 
       </ul>
@@ -853,230 +895,7 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <div class="col-lg-12 col-12">
-                <!-- small box -->
-                <div class="small-box bg-teal">
-                  <div class="inner">
-                    <h3>150</h3>
-                    <p>TOTALES</p>
-                  </div>
-                  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                </div>
-              </div>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard v1</li>
-              </ol>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.content-header -->
-
-      <!-- Main content -->
-      <section class="content">
-        <div class="container-fluid">
-          <!-- Small boxes (Stat box) -->
-          <div class="row">
-            <div class="col-lg-6 col-12">
-              <!-- small box -->
-              <div class="small-box bg-success">
-                <div class="inner">
-                  <h2>Ganadas $</h2>
-                  <p class="mb-0">Tarjetas</p>
-                  <h3>8.762.000</h3>
-                  <p class="mb-0">Facturación</p>
-                  <div class="align-items-center">
-                    <h4>USD 2.709.260.2</h4>
-                    <h4>$ 2.709.260.2</h4>
-                  </div>
-                  <p class="mb-0">Cmg</p>
-                  <div class="align-items-center">
-                    <h4>USD 2.709.260.2</h4>
-                    <h4>$ 2.709.260.2</h4>
-                    <h5>20%</h5>
-                  </div>
-                </div>
-                <div class="icon">
-                  <i class="font-weight-bolder">
-                    <bold>44%</bold>
-                  </i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-6 col-12">
-              <!-- small box -->
-              <div class="small-box bg-success">
-              <div class="inner">
-                  <h2>Ganadas u$d</h2>
-                  <p class="mb-0">Tarjetas</p>
-                  <h3>4.500.000</h3>
-                  <p class="mb-0">Facturación</p>
-                  <div class="align-items-center">
-                    <h4>USD 2.750.000</h4>
-                    <h4>$ 220.750.000</h4>
-                  </div>
-                  <p class="mb-0">Cmg</p>
-                  <div class="align-items-center">
-                    <h4>USD 800.000</h4>
-                    <h4>$ 80.000.000</h4>
-                    <h5>20%</h5>
-                  </div>
-                </div>
-                <div class="icon">
-                  <i>
-                    <bold>60%</bold>
-                  </i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-6 col-12">
-              <!-- small box -->
-              <div class="small-box bg-warning">
-                <div class="inner">
-                  <h2>En concurso $<small> 22%</small></h2>
-                  <p class="mb-0">Facturación</p>
-                  <h3>8.762.000</h3>
-                  <p class="mb-0">Cmg</p>
-                  <h4>USD 2.709.260.2<small> 15%</small></h4>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-6 col-12">
-              <!-- small box -->
-              <div class="small-box bg-warning">
-                <div class="inner">
-                  <h2>En concurso u$d<small> 22%</small></h2>
-                  <p class="mb-0">Facturación</p>
-                  <h3>8.762.000</h3>
-                  <p class="mb-0">Cmg</p>
-                  <h4>USD 2.709.260.2<small> 15%</small></h4>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-6 col-12">
-              <!-- small box -->
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h2>Perdidas $<small> 22%</small></h2>
-                  <p class="mb-0">Facturación</p>
-                  <h3>8.762.000</h3>
-                  <p class="mb-0">Cmg</p>
-                  <h4>USD 2.709.260.2<small> 15%</small></h4>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-6 col-12">
-              <!-- small box -->
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h2>Perdidas u$d<small> 22%</small></h2>
-                  <p class="mb-0">Facturación</p>
-                  <h3>8.762.000</h3>
-                  <p class="mb-0">Cmg</p>
-                  <h4>USD 2.709.260.2<small> 15%</small></h4>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
-          </div>
-          <!-- /.row -->
-          <!-- Main row -->
-          <div class="row">
-            <!-- Columna facturación -->
-            <section class="col-lg-6 connectedSortable">
-              <!-- Custom tabs (Charts with tabs)-->
-              <div class="card">
-                <div class="card-header">
-                  <h3 class="card-title">
-                    <i class="fas fa-chart-pie mr-1"></i>
-                    Facturación
-                  </h3>
-                  <div class="card-tools">
-                    <ul class="nav nav-pills ml-auto">
-                      <li class="nav-item">
-                        <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div><!-- /.card-header -->
-                <div class="card-body">
-                  <div class="tab-content p-0">
-                    <!-- Morris chart - Facturación -->
-                    <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;">
-                      <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
-                    </div>
-                    <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
-                      <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
-                    </div>
-                  </div>
-                </div><!-- /.card-body -->
-              </div>
-              <!-- /.card -->
-            </section>
-            <!-- /.Columna facturación -->
-
-            <!-- Columna cantidad -->
-            <section class="col-lg-6 connectedSortable">
-              <!-- Custom tabs (Charts with tabs)-->
-              <div class="card">
-                <div class="card-header">
-                  <h3 class="card-title">
-                    <i class="fas fa-chart-pie mr-1"></i>
-                    Cantidad
-                  </h3>
-                  <div class="card-tools">
-                    <ul class="nav nav-pills ml-auto">
-                      <li class="nav-item">
-                        <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div><!-- /.card-header -->
-                <div class="card-body">
-                  <div class="tab-content p-0">
-                    <!-- Morris chart - Facturación -->
-                    <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;">
-                      <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
-                    </div>
-                    <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
-                      <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
-                    </div>
-                  </div>
-                </div><!-- /.card-body -->
-              </div>
-              <!-- /.card -->
-            </section>
-            <!-- /.Columna cantidad -->
-
-          </div>
-        </div><!-- /.container-fluid -->
-      </section>
-      <!-- /.content -->
+      {contenido}
     </div>
     <!-- /.content-wrapper -->
 
@@ -1087,9 +906,8 @@
     <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
-</html>
 
-<script>
-//console.log('carga archivo php');
-  var base_url = "<?php echo base_url() ?>";
-</script>
+  
+</body>
+
+</html>
