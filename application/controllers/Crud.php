@@ -86,7 +86,7 @@ class Crud extends CI_Controller
       $json = json_decode($_POST['json'], true);
 
       if (isset($json['modelo']) && !empty($json['modelo']) && isset($json['valores'])) {
-        $valores = $json['valores'][0];
+        $valores = $json['valores'];
         $modelo = $json['modelo'];
         if (isset($valores['id'])) {
           $id = $valores['id'];
