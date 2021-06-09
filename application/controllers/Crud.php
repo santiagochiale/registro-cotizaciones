@@ -288,7 +288,7 @@ class Crud extends CI_Controller
             'data'            => ''
           );
         }
-
+        //TODO: evaluar si tiene registros asociados al registro que se quiere borrar
 
         $dataJ = json_encode($data);
         if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un return

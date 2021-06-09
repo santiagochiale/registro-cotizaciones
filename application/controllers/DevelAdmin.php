@@ -17,19 +17,82 @@ class DevelAdmin extends CI_Controller
   //************************************************************************************************************************************* */
   //********************************************************METODOS DE MANEJO DE PAGINAS**************************************************/
   public function index()
-  { 
-      $view["contenido"] = $this->load->view("app/content_home",NULL, TRUE);;
-      $view["titulo"] = "Pagina Principal";
-      //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
-      $this->parser->parse("app/estructura_app",$view);
-    
+  {
+    $view["contenido"] = $this->load->view("app/content_home", NULL, TRUE);;
+    $view["titulo"] = "Pagina Principal";
+    //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
+    $this->parser->parse("app/estructura_app", $view);
   }
 
-  public function productos() {
-      $view["contenido"] = $this->load->view("app/content_productos",NULL, true);
-        
-      $view["titulo"] = "Pagina Productos";
-      //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
-      $this->parser->parse("app/estructura_app",$view);
+  public function productos()
+  {
+    $view["contenido"] = $this->load->view("app/content_productos", NULL, true);
+
+    $view["titulo"] = "Pagina Productos";
+    //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
+    $this->parser->parse("app/estructura_app", $view);
+  }
+
+  public function clientes()
+  {
+    $view["contenido"] = $this->load->view("app/content_clientes", NULL, true);
+
+    $view["titulo"] = "Pagina Clientes";
+    //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
+    $this->parser->parse("app/estructura_app", $view);
+  }
+
+  public function empresas()
+  {
+    $view["contenido"] = $this->load->view("app/content_empresas", NULL, true);
+
+    $view["titulo"] = "Pagina Empresas";
+    //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
+    $this->parser->parse("app/estructura_app", $view);
+  }
+
+  public function estado_oc()
+  {
+    $view["contenido"] = $this->load->view("app/content_estado_oc", NULL, true);
+
+    $view["titulo"] = "Pagina Estados OC";
+    //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
+    $this->parser->parse("app/estructura_app", $view);
+  }
+
+  public function estado_produccion()
+  {
+    $view["contenido"] = $this->load->view("app/content_estado_produccion", NULL, true);
+
+    $view["titulo"] = "Pagina Estados Producción";
+    //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
+    $this->parser->parse("app/estructura_app", $view);
+  }
+
+  public function grupos()
+  {
+    $view["contenido"] = $this->load->view("app/content_grupos", NULL, true);
+
+    $view["titulo"] = "Pagina Grupos";
+    //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
+    $this->parser->parse("app/estructura_app", $view);
+  }
+
+  public function impuestos()
+  {
+    $view["contenido"] = $this->load->view("app/content_impuestos", NULL, true);
+
+    $view["titulo"] = "Pagina Impuestos";
+    //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
+    $this->parser->parse("app/estructura_app", $view);
+  }
+
+  public function monedas()
+  {
+    $view["contenido"] = $this->load->view("app/content_monedas", NULL, true);
+
+    $view["titulo"] = "Pagina Monedas";
+    //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
+    $this->parser->parse("app/estructura_app", $view);
   }
 }
