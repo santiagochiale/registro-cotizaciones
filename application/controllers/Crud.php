@@ -134,7 +134,7 @@ class Crud extends CI_Controller
                 'code'              => 200,
                 'message_error'     => '',
                 'data'              => '',
-                'validation_errors' => 'Registro modificado'
+                'validation_errors' => 'Registro Modificado'
               );//TODO: agregar updated_at y ultimo usuario que realizo cambios
             } else {
               $data = array(
@@ -263,17 +263,17 @@ class Crud extends CI_Controller
       return;
     } else {
       $json = json_decode($_POST['json'], true);
-      if (isset($json['modelo']) && !empty($json['modelo']) && isset($json['valores'])) {
+      if (isset($json['modelo']) && !empty($json['modelo']) && isset($json['filtros'])) {
         $modelo = $json['modelo'];
-        $valores = $json['valores'][0];
+        $filtros = $json['filtros'];
 
         $filtros = array(
-          'id' => $valores['id']
+          'id' => $filtros['id']
         );
-        $count = $this->$modelo->find($filtros); //se evalua si el id existe en la bd
+        //$count = $this->$modelo->find($filtros); //se evalua si el id existe en la bd
 
         if (!empty($this->$modelo->find($filtros))) {
-          $respuesta['payload'] = $this->$modelo->delete($valores['id']);
+          $respuesta['payload'] = $this->$modelo->delete($filtros['id']);
           $data = array(
             'status'          => 'success',
             'code'            => 200,
