@@ -288,27 +288,7 @@
     $('#modal-edicion').on('show.bs.modal', function(e) {
         //{"modelo":"ClientesModel","valores":{"id":"26","nombre_cliente":"tarjetas nuevas","id_grupo":"2","cod_sap":"0000"}}
         //console.log(id_cliente);
-        var filtrosNull = {};
-        var valoresSelect = new toJson(modelo, filtrosNull, null);
-        var jsonString = JSON.stringify(valoresSelect);
-        //console.log(jsonString);
-        var urlAjax = "<?php echo base_url() ?>crud/encontrar_registro";
-
-        $.ajax({
-            type: 'POST',
-            url: urlAjax,
-            data: {
-                json: jsonString
-            }
-        }).done(function(response) {
-            var responseJP = JSON.parse(response); //esto se recibe con formato Json pero en variable string
-            //console.log(responseJP['data'][0].nombre_cliente);
-
-            $.each(responseJP['data'], function(key, valor) {
-                $("#id_grupo").append(`<option id=${valor.id_cliente} value=${valor.id_grupo}>${valor.descripcion_grupo}</option>`);
-            });
-        });
-
+        
         if (id_cliente != "") { //si el id no es vacio, quiere decir que es una edición del registro y no una inserción
             var valoresSelect = new toJson(modelo, filtros, null)
             var jsonString = JSON.stringify(valoresSelect);

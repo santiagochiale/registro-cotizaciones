@@ -60,6 +60,15 @@ class DevelAdmin extends CI_Controller
     $this->parser->parse("app/estructura_app", $view);
   }
 
+  public function estado_cotizacion()
+  {
+    $view["contenido"] = $this->load->view("app/content_estado_cotizacion", NULL, true);
+
+    $view["titulo"] = "Pagina Estados Cotización";
+    //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
+    $this->parser->parse("app/estructura_app", $view);
+  }
+
   public function estado_produccion()
   {
     $view["contenido"] = $this->load->view("app/content_estado_produccion", NULL, true);
