@@ -208,6 +208,10 @@
     $('#nuevoEmpresa').on('click', function(e) {
         //console.log('click en agregar prodcuto');
         id_empresa = "";
+        delete filtros['id'];
+        delete valores['id'];
+
+        //TODO: no mostrar valores de la ultima edición cuando se agrega un nuevo registro
     });
     //evento que se desata al momento de hacer click en el boton de edición de cada item del datatables
     $('#tablaEmpresas').on('click', '.editarEmpresa', function() {

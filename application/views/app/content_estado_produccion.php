@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Listado Productos</h1>
+                <h1>Estados Producción</h1>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -16,19 +16,17 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row align-items-center">
-                            <span class="card-title">Agregar Producto</span>
-                            <button data-toggle="modal" data-target="#modal-edicion" class="btn" id="nuevoProducto"><i class="far fa-plus-square btn"></button></i>
+                            <span class="card-title">Agregar Estado</span>
+                            <button data-toggle="modal" data-target="#modal-edicion" class="btn" id="nuevoEstado"><i class="far fa-plus-square btn"></button></i>
                         </div>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="tablaProductos" class="table table-striped">
+                        <table id="tablaEstado" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Producto</th>
-                                    <th>Grupo</th>
-                                    <th>Material SAP</th>
+                                    <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -50,7 +48,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Productos</h4>
+                <h4 class="modal-title">Estado Producción</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -61,21 +59,11 @@
                     <!-- jquery validation -->
 
                     <!-- form start -->
-                    <form id="formProductos">
+                    <form id="formEstado">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="descripcion_producto">Producto</label>
-                                <input type="text" name="descripcion_producto" class="form-control" id="descripcion_producto" placeholder="Descripción">
-                            </div>
-                            <div class="form-group">
-                                <label>Grupo</label>
-                                <select class="form-control select2" id="id_grupo" name="id_grupo" style="width: 100%;">
-                                    <option class="selected"></option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="cod_sap">Material</label>
-                                <input type="text" name="cod_sap" class="form-control" id="cod_sap" placeholder="Codigo SAP">
+                                <label for="estado_produccion">Estado</label>
+                                <input type="text" name="estado_produccion" class="form-control" id="estado_produccion" placeholder="Estado">
                             </div>
                         </div>
                         <!-- /.card-body -->
@@ -100,11 +88,11 @@
 </div>
 
 <script>
-    var id_producto = "";
-    var modelo = 'ProductosModel';
+    var id_estado_produccion = "";
+    var modelo = 'EstadoProduccionModel';
     var filtros = {};
     var valores = {};
-    var validationBk;
+   // var validationBk;
     var valoresSerArray;
     //------------------------------------------funciones propias---------------------------------------
     function toJson(modelo, filtros, valores) {
@@ -144,15 +132,15 @@
         var filtros = {};
 
         var json = {
-            modelo: "ProductosModel",
+            modelo: modelo,
             filtros: filtros
         };
 
         var jsonString = JSON.stringify(json);
         var urlAjax = "<?php echo base_url() ?>crud/encontrar_registro";
 
-        // se carga el datatable con los datos de los productos
-        $("#tablaProductos").DataTable({
+        // se carga el datatable con los datos de los 
+        $("#tablaEstado").DataTable({
             "responsive": true,
             "autoWidth": false,
             "lengthChange": true,
@@ -176,30 +164,24 @@
             }),
             columns: [{ //aqui se levanta el id de cada fila que se muestra en la tabla para armar los id de los elementos editar y borrar del campo aciones
                     data: function(data) {
-                        id_producto = data['id_producto'];
-                        return data['id_producto'];
+                        id_estado_produccion = data['id_estado-produccion'];
+                        return data['id_estado-produccion'];
                     }
                 },
                 {
-                    data: 'descripcion_producto'
-                },
-                {
-                    data: 'descripcion_grupo'
-                },
-                {
-                    data: 'cod_sap'
+                    data: 'estado_produccion'
                 },
                 {
                     data: null,
                     render: function() {
                         var html = '<div class="btn-group">';
                         html += '<div class = "container">';
-                        html += '<button data-toggle=modal data-target=#modal-edicion class="editarProducto btn" id = "editar' + id_producto + '">';
+                        html += '<button data-toggle=modal data-target=#modal-edicion class="editarEstado btn" id = "editar' + id_estado_produccion + '">';
                         html += '<i class= "fas fa-pencil-alt"></i>';
                         html += '</button>';
                         html += '</div>';
                         html += '<div class = "container" style = "margin: 0">';
-                        html += '<button class= "borrarProducto btn" id= "borrar' + id_producto + '">';
+                        html += '<button class= "borrarEstado btn" id= "borrar' + id_estado_produccion + '">';
                         html += '<i class= "far fa-trash-alt"></i>';
                         html += '</button>';
                         html += '</div>';
@@ -222,30 +204,30 @@
         width: '40rem'
     });
     //----------------------------------------- manejo de eventos------------------------------
-    //evento que se desata al momento de hacer click en "agregar producto"
-    $('#nuevoProducto').on('click', function(e) {
+    //evento que se desata al momento de hacer click en "agregar registro"
+    $('#nuevoEstado').on('click', function(e) {
         //console.log('click en agregar prodcuto');
-        id_producto = "";
+        id_estado_produccion = "";
         delete filtros['id'];
         delete valores['id'];
 
         //TODO: no mostrar valores de la ultima edición cuando se agrega un nuevo registro
     });
     //evento que se desata al momento de hacer click en el boton de edición de cada item del datatables
-    $('#tablaProductos').on('click', '.editarProducto', function() {
-        //console.log('click en edición de producto');
+    $('#tablaEstado').on('click', '.editarEstado', function() {
+        //console.log('click en edición de registro');
         id = this.id;
-        id_producto = id.substring(6); //el id de este elemento es editarxx (xx es el id del proceso) con esta linea se extrae solo el numero
+        id_estado_produccion = id.substring(6); //el id de este elemento es editarxx (xx es el id del proceso) con esta linea se extrae solo el numero
         //con estas lineas se levanta el id a editar
-        filtros['id'] = id_producto;
+        filtros['id'] = id_estado_produccion;
     });
     //evento que se desata al momento de hacer click en el icono de borrar registro
-    $('#tablaProductos').on('click', '.borrarProducto', function() {
+    $('#tablaEstado').on('click', '.borrarEstado', function() {
         //console.log('click en borrar');
         id = this.id;
-        id_producto = id.substring(6); //el id de este elemento es borrarxx (xx es el id del proceso) con esta linea se extrae solo el numero
+        id_estado_produccion = id.substring(6); //el id de este elemento es borrarxx (xx es el id del proceso) con esta linea se extrae solo el numero
 
-        filtros['id'] = id_producto;
+        filtros['id'] = id_estado_produccion;
         var peticionJson = new toJson(modelo, filtros, null);
         var peticionJsonString = JSON.stringify(peticionJson);
         //console.log(peticionJsonString);
@@ -262,7 +244,7 @@
             var data = responseJP['data'][0];
             //console.log(data.nombre_maquina);
             Swal.fire({
-                title: 'Desea eliminar el siguiente registro?' + data.descripcion_producto,
+                title: 'Desea eliminar el siguiente registro?' + data.estado_produccion,
                 text: "Luego de aceptar no podra revertir la acción.",
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -285,7 +267,7 @@
                             //var data = responseJP['data'][0];
                             console.log(responseJP);
                             if (responseJP.code == 200) {
-                                $('#tablaProductos').DataTable().ajax.reload();
+                                $('#tablaEstado').DataTable().ajax.reload();
                                 Toast.fire({
                                     type: 'success',
                                     title: 'Registro borrado'
@@ -308,31 +290,11 @@
     });
     //--------------evento luego de mostrar el modal de edición-----------------------------------------
     $('#modal-edicion').on('show.bs.modal', function(e) {
-        //{"modelo":"ProductosModel","valores":{"id":"26","descripcion_producto":"tarjetas nuevas","id_grupo":"2","cod_sap":"0000"}}
-        //console.log(id_producto);
-        var filtrosNull = {};
-        var valoresSelect = new toJson(modelo, filtrosNull, null);
-        var jsonString = JSON.stringify(valoresSelect);
-        //console.log(jsonString);
+        //{"modelo":"EstadoModel","valores":{"id":"26","estado_cotizacion":"tarjetas nuevas","id_grupo":"2","cod_sap":"0000"}}
+        //console.log(id_estado_coti);
         var urlAjax = "<?php echo base_url() ?>crud/encontrar_registro";
-
-        $.ajax({
-            type: 'POST',
-            url: urlAjax,
-            data: {
-                json: jsonString
-            }
-        }).done(function(response) {
-            var responseJP = JSON.parse(response); //esto se recibe con formato Json pero en variable string
-            //console.log(responseJP['data'][0].descripcion_producto);
-
-            $.each(responseJP['data'], function(key, valor) {
-                $("#id_grupo").append(`<option id=${valor.id_producto} value=${valor.id_grupo}>${valor.descripcion_grupo}</option>`);
-            });
-        });
-
-        if (id_producto != "") { //si el id no es vacio, quiere decir que es una edición del registro y no una inserción
-            
+        
+        if (id_estado_produccion != "") { //si el id no es vacio, quiere decir que es una edición del registro y no una inserción
             var valoresSelect = new toJson(modelo, filtros, null)
             var jsonString = JSON.stringify(valoresSelect);
             $.ajax({
@@ -345,10 +307,9 @@
                 var responseJP = JSON.parse(response); //esto se recibe con formato Json pero en variable string
                 //aqui debemos repoblar el modal
 
-                $('#descripcion_producto').val(responseJP['data'][0].descripcion_producto);
-                $('#cod_sap').val(responseJP['data'][0].cod_sap);
+                $('#estado_produccion').val(responseJP['data'][0].estado_produccion);
                 /*$.each(responseJP['data'], function(key, valor) {
-                    $("#id_grupo").append(`<option id=${valor.id_producto} value=${valor.id_grupo}>${valor.descripcion_grupo}</option>`);
+                    $("#id_grupo").append(`<option id=${valor.id_estado_coti} value=${valor.id_grupo}>${valor.descripcion_grupo}</option>`);
                 });*/
                 //TODO: mostrar el select que corresponda
             });
@@ -357,11 +318,11 @@
     });
 
     //evento de submit de los datos del formulario de edición
-    $('#formProductos').on('submit', function(e) {
+    $('#formEstado').on('submit', function(e) {
         //e.preventDefault();
-        //{"modelo":"ProductosModel","valores":[{"id":"26","descripcion_producto":"tarjetas nuevas","id_grupo":"2","cod_sap":"0000"}]}
+        //{"modelo":"EstadoModel","valores":[{"id":"26","estado_cotizacion":"tarjetas nuevas","id_grupo":"2","cod_sap":"0000"}]}
         //si el id va vacio va al metodo de inserción de registro nuevo, si no al de edicion
-        //id_producto = ""; // aqui se selecciona el registro que se quiere modificar. Si esta vacio es una insersión de registro nvo
+        //id_estado_coti = ""; // aqui se selecciona el registro que se quiere modificar. Si esta vacio es una insersión de registro nvo
         //var valores = {};
 
         valoresSerArray = $(this).serializeArray(); //esto devuelve un array donde cada imdice es un objeto con la forma {name: value}. Name es el nombre del label y value el valor del campo
@@ -374,8 +335,8 @@
     //------------------------------------------validación del formulario------------------------------------------
     $.validator.setDefaults({
         submitHandler: function() {
-            if (id_producto != "") {
-                valores['id'] = id_producto;
+            if (id_estado_produccion != "") {
+                valores['id'] = id_estado_produccion;
             }
 
             $.each(valoresSerArray, function(key, valor) {
@@ -383,9 +344,9 @@
                 valores[valor.name] = valor.value;
             });
             // console.log(valores);
-            var jsonObj = new toJson('ProductosModel', null, valores);
+            var jsonObj = new toJson(modelo, null, valores);
 
-            //console.log(JSON.stringify(jsonObj)); //en este punto esta listo el json para enviarse al controlador
+            console.log(JSON.stringify(jsonObj)); //en este punto esta listo el json para enviarse al controlador
 
             var urlAjax = "<?php echo base_url() ?>crud/guardar_registro";
             $.ajax({
@@ -401,7 +362,7 @@
 
                 if (responseJP.code == 200 && responseJP.validation_errors == "Registro Insertado") {
                     $('#modal-edicion').modal('hide');
-                    $('#tablaProductos').DataTable().ajax.reload();
+                    $('#tablaEstado').DataTable().ajax.reload();
                     Toast.fire({
                         type: 'success',
                         title: 'Registro insertado'
@@ -409,7 +370,7 @@
                 }
                 if (responseJP.code == 200 && responseJP.validation_errors == "Registro Modificado") {
                     $('#modal-edicion').modal('hide');
-                    $('#tablaProductos').DataTable().ajax.reload();
+                    $('#tablaEstado').DataTable().ajax.reload();
                     Toast.fire({
                         type: 'success',
                         title: 'Registro modificado'
@@ -427,26 +388,16 @@
 
         }
     });
-    $('#formProductos').validate({
+    $('#formEstado').validate({
         rules: {
-            descripcion_producto: {
+            estado_produccion: {
                 required: true
-            },
-            id_grupo: {
-                required: true
-            },
-            cod_sap: {
-                required: true
-            },
+            }
         },
         messages: {
-            descripcion_producto: {
+            estado_produccion: {
                 required: "Por favor complete el campo"
-            },
-            id_grupo: {
-                required: "Por favor complete el campo"
-            },
-            cod_sap: "Por favor complete el campo"
+            }
         },
         errorElement: 'span',
         errorPlacement: function(error, element) {

@@ -15,6 +15,7 @@ class RegistroCotizacionesModel extends MY_Model{
     "monedas"                  => "monedas.id_moneda=registro_cotizaciones.id_moneda_coti", 
     "monedas"                  => "monedas.id_moneda=registro_cotizaciones.id_moneda_pres",
     "empresas"                => "empresas.id_empresa=registro_cotizaciones.id_empresas",
+    "impuestos"                => "impuestos.id_impuesto=registro_cotizaciones.id_impuesto",
     "estados_oc"              => "estados_oc.id_estado_oc=registro_cotizaciones.id_estado_oc",
     "estado_produccion"       => "estado_produccion.id_estado-produccion=registro_cotizaciones.id_estado_produccion"
   );

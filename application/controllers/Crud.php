@@ -34,6 +34,7 @@ class Crud extends CI_Controller
     $this->load->model("EstadoProduccionModel");
     $this->load->model("GruposModel");
     $this->load->model("MonedasModel");
+    $this->load->model("ImpuestosModel");
     $this->load->model("ProductosModel");
     $this->load->model("RegistroCotizacionesModel");
   }
