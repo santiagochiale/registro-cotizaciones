@@ -30,6 +30,8 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/summernote/summernote-bs4.min.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/daterangepicker/daterangepicker.css">
 
   <!----------------------------------------------SCRIPTS--------------------------------------------------->
 
@@ -89,6 +91,11 @@
   <script src="<?php echo base_url(); ?>/assets/plugins/sweetalert2/sweetalert2.min.js"></script>
   <!-- Toasts-->
   <script src="<?php echo base_url(); ?>/assets/plugins/toastr/toastr.min.js"></script>
+  <!-- InputMask -->
+  <script src="<?php echo base_url(); ?>/assets/plugins/moment/moment.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/plugins/inputmask/jquery.inputmask.min.js"></script>
+  <!-- date-range-picker -->
+  <script src="<?php echo base_url(); ?>/assets/plugins/daterangepicker/daterangepicker.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -105,7 +112,7 @@
           <a href="<?php echo base_url() ?>develadmin/index" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Agregar cotización</a>
+          <a href="<?php echo base_url() ?>develadmin/form_cotizaciones" class="nav-link">Agregar cotización</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
           <a href="<?php echo base_url() ?>develadmin/resumen_cotizaciones" class="nav-link">Ver cotización</a>
@@ -327,7 +334,7 @@
                 </li>
               </ul>
             </li>
-           
+
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
