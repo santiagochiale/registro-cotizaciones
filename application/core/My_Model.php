@@ -16,6 +16,7 @@ class MY_Model extends CI_Model
   function find($filtros){ //esta funcion busca todos los elementos del campo field que coiciden con la condicion de value en ese campo y la fecha $fecha
     $this->db->select(); //selecciona todos los campos de la bd
     $this->db->from($this->table); //se define la tabla de la cual se van a seleccionar los campos. Esto viene del modelo
+    
     if(!empty($this->joins)){
       foreach ($this->joins as $key => $value) {
         $this->db->join($key, $value);
@@ -30,6 +31,7 @@ class MY_Model extends CI_Model
       }
     }
     $query = $this->db->get(); //se obtienen los datos de  ese id
+    //var_dump($query); die();
     return $query->result();; //descarga una fila con los datos del id recibido
   }
 

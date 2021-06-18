@@ -108,7 +108,7 @@
           <a href="#" class="nav-link">Agregar cotización</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Ver cotización</a>
+          <a href="<?php echo base_url() ?>develadmin/resumen_cotizaciones" class="nav-link">Ver cotización</a>
         </li>
 
       </ul>

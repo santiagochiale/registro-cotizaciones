@@ -8,24 +8,19 @@ class RegistroCotizacionesModel extends MY_Model{
   public $id = "id_cotizacion";
 
   public $joins = array(
-    "estado_cotizacion"       => "estado_cotizacion.id_estado_coti=registro_cotizaciones.id_estado_coti",
+    "estado_cotizacion"        => "estado_cotizacion.id_estado_coti=registro_cotizaciones.id_estado_coti",
     "clientes"                 => "clientes.id_cliente=registro_cotizaciones.id_cliente",
     "grupos"                   => "grupos.id_grupo=registro_cotizaciones.id_grupo",
-    "productos"               => "productos.id_producto=registro_cotizaciones.id_producto",
+    "productos"                => "productos.id_producto=registro_cotizaciones.id_producto",
     "monedas"                  => "monedas.id_moneda=registro_cotizaciones.id_moneda_coti", 
     "monedas"                  => "monedas.id_moneda=registro_cotizaciones.id_moneda_pres",
-    "empresas"                => "empresas.id_empresa=registro_cotizaciones.id_empresas",
-    "impuestos"                => "impuestos.id_impuesto=registro_cotizaciones.id_impuesto",
-    "estados_oc"              => "estados_oc.id_estado_oc=registro_cotizaciones.id_estado_oc",
-    "estado_produccion"       => "estado_produccion.id_estado-produccion=registro_cotizaciones.id_estado_produccion"
+    "empresas"                 => "empresas.id_empresa=registro_cotizaciones.id_empresas",
+    //"impuestos"                => "impuestos.id_impuesto=registro_cotizaciones.id_impuesto",
+    "estados_oc"               => "estados_oc.id_estado_oc=registro_cotizaciones.id_estado_oc",
+    "estado_produccion"        => "estado_produccion.id_estado-produccion=registro_cotizaciones.id_estado_produccion"
   );
 
-  public $array_validacion = array( [
-                                      "id"=>"id_estado_coti",
-                                      "label"=>"id_estado_coti",
-                                      "parametros"=>"required|regex_match[/[a-zA-ZñÑáéíóúÁÉÍÓÚ 0-9.]+$/]"
-                                      ],
-                                      [  
+  public $array_validacion = array(   [
                                       "id"=>"id_cliente",
                                       "label"=>"id_cliente",
                                       "parametros"=>"required|regex_match[/[a-zA-ZñÑáéíóúÁÉÍÓÚ 0-9.]+$/]"

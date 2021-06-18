@@ -183,7 +183,7 @@ class Crud extends CI_Controller
   public function encontrar_registro()
   {
     //TODO: redireccionar a auth si no hay sesion inicial
-    //forma de envio: {"modelo":"ClientesModel","filtros":[{"id":"2"}]}
+    //forma de envio: {"modelo":"ClientesModel","filtros":{"id":"2"}}
     //var_dump($_POST);
     //die();
 
@@ -214,15 +214,17 @@ class Crud extends CI_Controller
       } else {
         $filtros = array();
       }
-      $respuesta['payload'] = $this->$modelo->find($filtros); //TODO: evaluar si esta sentencia arraja error
-
+      //echo $modelo;
+      //die();
+      $respuesta['payload'] = $this->$modelo->find($filtros); //TODO: evaluar si esta sentencia arroja error
+      
       $data = array(
         'status'          => 'success',
         'code'            => 200,
         'message_error'   => '',
         'data'            => $respuesta['payload']
       );
-
+      //TODO: evaluar si es necesario hacer la distincion si la petición viene por ajax o no
       $dataJ = json_encode($data);
       if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un return
         echo $dataJ;

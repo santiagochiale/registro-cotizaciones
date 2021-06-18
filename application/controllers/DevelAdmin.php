@@ -104,4 +104,13 @@ class DevelAdmin extends CI_Controller
     //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
     $this->parser->parse("app/estructura_app", $view);
   }
+
+  public function resumen_cotizaciones()
+  {
+    $view["contenido"] = $this->load->view("app/content_resumen_cotizaciones", NULL, true);
+
+    $view["titulo"] = "Pagina Resumen Cotizaciones";
+    //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
+    $this->parser->parse("app/estructura_app", $view);
+  }
 }
