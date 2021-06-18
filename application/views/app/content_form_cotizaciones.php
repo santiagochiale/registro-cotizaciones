@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Agregar/Modificar cotización</h1>
+                <h1><?php echo $prueba ?></h1>
             </div>
         </div>
     </div><!-- /.container-fluid -->

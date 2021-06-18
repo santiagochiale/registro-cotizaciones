@@ -58,6 +58,10 @@ class Crud extends CI_Controller
     }
   }
 
+  public function prueba(){
+    echo 'prueba';
+  }
+
 
   //*************************************************************METODOS CRUD********************************************************* */
 

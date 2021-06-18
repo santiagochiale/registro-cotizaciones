@@ -12,6 +12,7 @@ class DevelAdmin extends CI_Controller
     //Carga de helpers propios
     $this->load->helper("hash_helper");
     $this->load->helper("date_helper");
+
   }
 
   //************************************************************************************************************************************* */
@@ -114,10 +115,13 @@ class DevelAdmin extends CI_Controller
     $this->parser->parse("app/estructura_app", $view);
   }
 
-  public function form_cotizaciones()
+  public function form_cotizaciones($id=null)
   {
-    $view["contenido"] = $this->load->view("app/content_form_cotizaciones", NULL, true);
-
+    $data['prueba'] = $this->crud->prueba();
+    //TODO: recibe el id del registro, si es vacio no envia ningun dato para mostrar, si no envia los datos del id a editar
+    //$data['prueba'] = 'prueba';
+    $view["contenido"] = $this->load->view("app/content_form_cotizaciones", $data, true);
+    
     $view["titulo"] = "Formulario cotizaciones";
     //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
     $this->parser->parse("app/estructura_app", $view);
