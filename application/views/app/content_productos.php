@@ -149,7 +149,7 @@
         };
 
         var jsonString = JSON.stringify(json);
-        var urlAjax = "<?php echo base_url() ?>crud/encontrar_registro";
+        var urlAjax = "<?php echo base_url() ?>index.php/Crud/encontrar_registro";
 
         // se carga el datatable con los datos de los productos
         $("#tablaProductos").DataTable({
@@ -249,7 +249,7 @@
         var peticionJson = new toJson(modelo, filtros, null);
         var peticionJsonString = JSON.stringify(peticionJson);
         //console.log(peticionJsonString);
-        var urlAjax = "<?php echo base_url() ?>crud/encontrar_registro";
+        var urlAjax = "<?php echo base_url() ?>index.php/Crud/encontrar_registro";
 
         $.ajax({
             type: 'POST',
@@ -271,7 +271,7 @@
                 confirmButtonText: 'Si, borrar'
             }).then((result) => {
                 if (result.value) {
-                    var urlAjax = "<?php echo base_url() ?>crud/borrar_registro";
+                    var urlAjax = "<?php echo base_url() ?>index.php/Crud/borrar_registro";
                     console.log(peticionJsonString);
                     $.ajax({
                             type: 'POST',
@@ -314,7 +314,7 @@
         var valoresSelect = new toJson(modelo, filtrosNull, null);
         var jsonString = JSON.stringify(valoresSelect);
         //console.log(jsonString);
-        var urlAjax = "<?php echo base_url() ?>crud/encontrar_registro";
+        var urlAjax = "<?php echo base_url() ?>index.php/Crud/encontrar_registro";
 
         $.ajax({
             type: 'POST',
@@ -387,7 +387,7 @@
 
             //console.log(JSON.stringify(jsonObj)); //en este punto esta listo el json para enviarse al controlador
 
-            var urlAjax = "<?php echo base_url() ?>crud/guardar_registro";
+            var urlAjax = "<?php echo base_url() ?>index.php/Crud/guardar_registro";
             $.ajax({
                 type: 'POST',
                 url: urlAjax,

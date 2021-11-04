@@ -27,6 +27,32 @@ class ProductosModel extends MY_Model{
                                       "parametros"    =>"required|regex_match[/[a-zA-ZñÑáéíóúÁÉÍÓÚ 0-9.]+$/]"
                                       ]
                                     );
+
+    public function getProductos($params = array()){
+        $this->db->from($this->table)
+            ->order_by('descripcion_producto');
+
+        if (!empty($params['id_producto'])){
+            $this->db->where('id_producto', $params['id_producto']);
+        }
+
+        $sql = $this->db->get();
+        if ($sql->num_rows()){
+            if (!empty($params['id_producto'])){
+                return $sql->row_array();
+            }
+            return $sql->result_array();
+        }
+    }
+
+    public function getGrupoIdByProductoId($id_producto){
+        $sql = $this->db->get_where('productos', array('id_producto'=>$id_producto));
+        if ($sql->num_rows()==1){
+            $result = $sql->row_array();
+            return $result['id_grupo'];
+        }
+        return NULL;
+    }
   
 
 }

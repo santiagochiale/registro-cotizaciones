@@ -96,10 +96,14 @@
   <script src="<?php echo base_url(); ?>/assets/plugins/inputmask/jquery.inputmask.min.js"></script>
   <!-- date-range-picker -->
   <script src="<?php echo base_url(); ?>/assets/plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- script propios-->
+  <!--<script src="<?php echo base_url(); ?>/assets/js/agregar_cotizacion.js"></script>-->
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+
   <div class="wrapper">
+      <?php if (!empty($this->session->username)) : ?>
 
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -109,13 +113,13 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="<?php echo base_url() ?>develadmin/index" class="nav-link">Home</a>
+          <a href="<?php echo base_url() ?>index.php/DevelAdmin" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="<?php echo base_url() ?>develadmin/form_cotizaciones" class="nav-link">Agregar cotización</a>
+          <a href="<?php echo base_url() ?>index.php/DevelAdmin/form_cotizaciones" class="nav-link">Agregar cotización</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="<?php echo base_url() ?>develadmin/resumen_cotizaciones" class="nav-link">Ver cotización</a>
+          <a href="<?php echo base_url() ?>index.php/DevelAdmin/resumen_cotizaciones" class="nav-link">Ver cotización</a>
         </li>
 
       </ul>
@@ -229,9 +233,11 @@
             <i class="fas fa-th-large"></i>
           </a>
         </li>
+          <?php if (!empty($this->session->username)) : ?>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="<?php echo base_url() ?>Auth/logout" id="logout">Salir</a>
+          <a href="<?php echo base_url() ?>index.php/Auth/logout" id="logout">Salir</a>
         </li>
+          <?php endif; ?>
       </ul>
     </nav>
     <!-- /.navbar -->
@@ -279,55 +285,55 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="<?php echo base_url() ?>develadmin/clientes" class="nav-link">
+                  <a href="<?php echo base_url() ?>index.php/DevelAdmin/clientes" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Clientes</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?php echo base_url() ?>develadmin/empresas" class="nav-link">
+                  <a href="<?php echo base_url() ?>index.php/DevelAdmin/empresas" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Empresas</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?php echo base_url() ?>develadmin/estado_oc" class="nav-link">
+                  <a href="<?php echo base_url() ?>index.php/DevelAdmin/estado_oc" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Estado OCs</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?php echo base_url() ?>develadmin/estado_cotizacion" class="nav-link">
+                  <a href="<?php echo base_url() ?>index.php/DevelAdmin/estado_cotizacion" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Estado Cotizaciones</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?php echo base_url() ?>develadmin/estado_produccion" class="nav-link">
+                  <a href="<?php echo base_url() ?>index.php/DevelAdmin/estado_produccion" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Estado Producción</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?php echo base_url() ?>develadmin/grupos" class="nav-link">
+                  <a href="<?php echo base_url() ?>index.php/DevelAdmin/grupos" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Grupos</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?php echo base_url() ?>develadmin/impuestos" class="nav-link">
+                  <a href="<?php echo base_url() ?>index.php/DevelAdmin/impuestos" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Impuestos</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?php echo base_url() ?>develadmin/monedas" class="nav-link">
+                  <a href="<?php echo base_url() ?>index.php/DevelAdmin/monedas" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Monedas</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?php echo base_url() ?>develadmin/productos" class="nav-link">
+                  <a href="<?php echo base_url() ?>index.php/DevelAdmin/productos" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Productos</p>
                   </a>
@@ -353,6 +359,14 @@
       <!-- Control sidebar content goes here -->
     </aside>
     <!-- /.control-sidebar -->
+      <?php else : ?>
+          <div class="col-md-12 text-center">
+              <?php echo $this->load->view("admin/login", NULL, TRUE); ?>
+          </div>
+
+
+      <?php endif; ?>
+
   </div>
   <!-- ./wrapper -->
 
@@ -360,3 +374,4 @@
 </body>
 
 </html>
+

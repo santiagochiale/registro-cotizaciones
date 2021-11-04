@@ -215,12 +215,20 @@ class Crud extends CI_Controller
       $modelo = $json['modelo'];
       if (!empty($json['filtros'])) {
         $filtros = $json['filtros'];
+        if (!empty($filtros['registro_cotizaciones'])){         //params agregado en DevelAdmin resumen_cotizaciones
+            unset($filtros['registro_cotizaciones']);
+            foreach ($filtros as $key => $value){
+                $filtros['registro_cotizaciones.'.$key] = $value;
+                unset($filtros[$key]);
+            }
+        }
       } else {
         $filtros = array();
       }
       //echo $modelo;
       //die();
       $respuesta['payload'] = $this->$modelo->find($filtros); //TODO: evaluar si esta sentencia arroja error
+//        var_dump($respuesta); exit;
       
       $data = array(
         'status'          => 'success',

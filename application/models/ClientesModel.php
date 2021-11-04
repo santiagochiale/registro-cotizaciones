@@ -17,4 +17,14 @@ class ClientesModel extends MY_Model{
                                     ]
                                   );
 
+  public function getClientes($params = array()){
+      $this->db->from($this->table)
+          ->order_by('nombre_cliente');
+
+      $sql = $this->db->get();
+      if ($sql->num_rows()){
+          return $sql->result_array();
+      }
+  }
+
 }

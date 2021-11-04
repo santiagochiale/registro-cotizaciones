@@ -22,16 +22,36 @@ class MY_Model extends CI_Model
         $this->db->join($key, $value);
       }
     }
+
+    if(!empty($this->leftJoins)){
+      foreach ($this->leftJoins as $key => $value) {
+        $this->db->join($key, $value, 'left');
+      }
+    }
     if(!empty($filtros)){
       foreach ($filtros as $key => $value) {
         if($key=="id"){
           $key=$this->id;
         }
-        $this->db->where($key, $value); 
+        if ($key=='registro_cotizaciones.fecha_cotizacion'){
+            $fechas = explode(' - ', $value);
+            $begin = date('Y-m-d', strtotime(str_replace('/', '-',$fechas[0])));
+            $end = date('Y-m-d', strtotime(str_replace('/', '-',$fechas[1])));
+            $this->db->where("registro_cotizaciones.fecha_cotizacion BETWEEN '$begin' AND '$end'");
+        }
+        elseif ($key=='registro_cotizaciones.fecha_oc'){
+            $fechas = explode(' - ', $value);
+            $begin = date('Y-m-d', strtotime(str_replace('/', '-',$fechas[0])));
+            $end = date('Y-m-d', strtotime(str_replace('/', '-',$fechas[1])));
+            $this->db->where("registro_cotizaciones.fecha_oc BETWEEN '$begin' AND '$end'");
+        }
+        else{
+            $this->db->where($key, $value);
+        }
       }
     }
     $query = $this->db->get(); //se obtienen los datos de  ese id
-    //var_dump($query); die();
+//    var_dump($query, $this->db->last_query()); die();
     return $query->result();; //descarga una fila con los datos del id recibido
   }
 

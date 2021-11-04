@@ -17,6 +17,17 @@ class EstadoCotizacionModel extends MY_Model{
                                       "parametros"=>"required|regex_match[/[a-zA-ZñÑáéíóúÁÉÍÓÚ 0-9.]+$/]"
                                       ]
                                     );
+
+
+  public function getEstadosCotizacion($params = array()){
+      $this->db->from($this->table)
+          ->order_by('estado_cotizacion');
+
+      $sql = $this->db->get();
+      if ($sql->num_rows()){
+          return $sql->result_array();
+      }
+  }
   
 
 }

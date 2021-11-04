@@ -142,7 +142,7 @@
         };
 
         var jsonString = JSON.stringify(json);
-        var urlAjax = "<?php echo base_url() ?>crud/encontrar_registro";
+        var urlAjax = "<?php echo base_url() ?>index.php/Crud/encontrar_registro";
        // console.log(jsonString);
         // se carga el datatable con los datos de los 
         $("#tablaMoneda").DataTable({
@@ -241,7 +241,7 @@
         var peticionJson = new toJson(modelo, filtros, null);
         var peticionJsonString = JSON.stringify(peticionJson);
         //console.log(peticionJsonString);
-        var urlAjax = "<?php echo base_url() ?>crud/encontrar_registro";
+        var urlAjax = "<?php echo base_url() ?>index.php/Crud/encontrar_registro";
 
         $.ajax({
             type: 'POST',
@@ -263,7 +263,7 @@
                 confirmButtonText: 'Si, borrar'
             }).then((result) => {
                 if (result.value) {
-                    var urlAjax = "<?php echo base_url() ?>crud/borrar_registro";
+                    var urlAjax = "<?php echo base_url() ?>index.php/Crud/borrar_registro";
                     console.log(peticionJsonString);
                     $.ajax({
                             type: 'POST',
@@ -302,7 +302,7 @@
     $('#modal-edicion').on('show.bs.modal', function(e) {
         //{"modelo":"EstadoModel","valores":{"id":"26","estado_cotizacion":"tarjetas nuevas","id_grupo":"2","cod_sap":"0000"}}
         //console.log(id_estado_coti);
-        var urlAjax = "<?php echo base_url() ?>crud/encontrar_registro";
+        var urlAjax = "<?php echo base_url() ?>index.php/Crud/encontrar_registro";
         
         console.log(id_moneda);
         if (id_moneda != "") { //si el id no es vacio, quiere decir que es una edición del registro y no una inserción
@@ -360,7 +360,7 @@
 
             console.log(JSON.stringify(jsonObj)); //en este punto esta listo el json para enviarse al controlador
 
-            var urlAjax = "<?php echo base_url() ?>crud/guardar_registro";
+            var urlAjax = "<?php echo base_url() ?>index.php/Crud/guardar_registro";
             $.ajax({
                 type: 'POST',
                 url: urlAjax,

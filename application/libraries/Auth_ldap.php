@@ -15,7 +15,7 @@
 
     You should have received a copy of the GNU General Public License
     along with Auth_Ldap.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 /**
  * Auth_Ldap Class
@@ -48,7 +48,7 @@ class CI_Auth_ldap extends CI_Controller{
         $this->_init();
     }
 
-    
+
     /**
      * @access private
      * @return void
@@ -83,7 +83,7 @@ class CI_Auth_ldap extends CI_Controller{
      * @access public
      * @param string $username
      * @param string $password
-     * @return bool 
+     * @return bool
      */
     public function login($username, $password) {
         /*
@@ -91,27 +91,44 @@ class CI_Auth_ldap extends CI_Controller{
          * something else here before hand in the future.
          */
 
-        $user_info = $this->_authenticate($username,$password);
-        //echo '<h1>Return autenticate</h1><pre>';
-        //print_r($user_info);   
-        //echo '</pre>';
-        /*if(empty($user_info['role'])) {
-            log_message('info', $username." has no role to play.");
-            //show_error($username.' succssfully authenticated, but is not allowed because the username was not found in an allowed access group.');
-            return FALSE;
-        }*/
-        // Record the login
-        if($user_info['error']==""){
-            $this->_audit("Successful login: ".$user_info['cn']."(".$username.") from ".$this->ci->input->ip_address());
-            
-            $customdata = array('username' => $username,
-                                'cn' => $user_info['cn'],
-                                'role' => $user_info['role'],
-                                'logged_in' => TRUE);
-        
+        if (defined('LOGIN_LOCAL') && !empty('LOGIN_LOCAL')){
+            if ($username == 'prueba' && $password == 'local'){
+                $user_info = array('name'=>'Prueba', 'error'=>'');
+                $customdata = array('username' => $username,
+                    'cn' => 'prueba',
+                    'role' => 'prueba',
+                    'logged_in' => TRUE);
+            }
+            else{
+                $user_info['error'] = 'Login local incorrecto';
+            }
+
+        }
+        else{
+            $user_info = $this->_authenticate($username,$password);
+            //echo '<h1>Return autenticate</h1><pre>';
+            //print_r($user_info);
+            //echo '</pre>';
+            /*if(empty($user_info['role'])) {
+                log_message('info', $username." has no role to play.");
+                //show_error($username.' succssfully authenticated, but is not allowed because the username was not found in an allowed access group.');
+                return FALSE;
+            }*/
+            // Record the login
+            if($user_info['error']==""){
+                $this->_audit("Successful login: ".$user_info['cn']."(".$username.") from ".$this->ci->input->ip_address());
+
+                $customdata = array('username' => $username,
+                    'cn' => $user_info['cn'],
+                    'role' => $user_info['role'],
+                    'logged_in' => TRUE);
+            }
+        }
+
+        if (isset($customdata)){
             $this->ci->session->set_userdata($customdata);
         }
-        
+
         return $user_info;
     }
 
@@ -126,7 +143,7 @@ class CI_Auth_ldap extends CI_Controller{
             return FALSE;
         }
     }
-    
+
     /**
      * @access public
      */
@@ -154,11 +171,11 @@ class CI_Auth_ldap extends CI_Controller{
      * @access private
      * @param string $username
      * @param string $password
-     * @return array 
+     * @return array
      */
     private function _authenticate($username, $password) {
         $needed_attrs = array('dn', 'cn', $this->login_attribute);
-        
+
         //*******************************************************SETEO DE OPCIONES LDAP******************* */
         ldap_set_option(NULL, LDAP_OPT_PROTOCOL_VERSION, 3);
         ldap_set_option(NULL, LDAP_OPT_REFERRALS, 0);
@@ -170,21 +187,21 @@ class CI_Auth_ldap extends CI_Controller{
         //ademas dentro de sysconf crear un archivo ldap.conf con lo siguiente:
         //  TLS_REQCERT allow
         //  TLS_CACERT c:\OpenLDAP\sysconf\CA_UnitecBlue_2048_2015_11_02.crt (aqui colocar la ruta al CA)
-        
+
         if($this->ldapconn = ldap_connect($this->ldap_uri)) { //se intenta la primera conexión al server LDAP via la url detallada en el archivo de configuración Auth_ldap (dentro de aplication/conf)
             $this->_audit('Conectado a : '.$this->ldap_uri);
-            
+
             // We've connected, now we can attempt the login...
             $this->_audit('binding...');
-            $bind = ldap_bind($this->ldapconn,$this->usernameldap,$this->passwordldap); //una vez que nos conectamos intentamos un bind con el user y password proporcinados
+           $bind = ldap_bind($this->ldapconn,$this->usernameldap,$this->passwordldap); //una vez que nos conectamos intentamos un bind con el user y password proporcinados
             //si este bind falla es porque hay un problema con los datos de autenticación (user y pass) o bien con el protocolo de conexión al servidor (eg: ldaps)
             if(!$bind){
                 $cn = "";
                 $dn = "";
                 $id = "";
-                $role = ""; 
+                $role = "";
                 $role ="";
-                $error = "Imposible autenticar al servidor";
+                $error = "Imposible autentificar al servidor";
                 $this->_audit('error, Unable to perform anonymous');
                 return array('cn' => $cn, 'dn' => $dn, 'id' => $id,
                     'role' => $role ,'error'=>$error); //este metodo devuelve este array con los distintos datos que se esten obteniendo
@@ -192,56 +209,83 @@ class CI_Auth_ldap extends CI_Controller{
             $this->_audit('debug, Successfully bound to directory.  Performing dn lookup for '.$username);
 
             $filter = '('.$this->login_attribute.'='.$username.')';
-            $search = ldap_search($this->ldapconn, $this->basedn, $filter, array('dn', $this->login_attribute, 'cn'));
+            $search = ldap_search($this->ldapconn, $this->basedn, $filter, array('dn', $this->login_attribute, 'cn', 'memberof'));
             $entries = ldap_get_entries($this->ldapconn, $search);
-        
+
             //una vez que el bind anterior fue un exito, armamos la busqueda con para el usuario que se esta logueando y los datos del archivo config
             //con la variable $search armada buscamos que entrada coincide y las guardamos en $entries. Si esto esta vacio es que no se encontro usuario con el username provisto
             if ($entries['count']==0){
                 $cn = "";
                 $dn = "";
                 $id = "";
-                $role = ""; 
+                $role = "";
                 $role ="";
                 $error = "Credenciales invalidas";
                 $this->_audit('Registro no encontrado');
             }else{//si se consiguio encontrar coicidencia con el username, buscamos en particular el parametro para autenticar con el password ingresado y realizamos un nuevo bind
                 $binddn = $entries[0]['cn'][0];
-                $bind = ldap_bind($this->ldapconn, $binddn, $password);
+                // foreach ($entries[0] as $key => $value){
+                //   echo '<br /> ======== <br />';
+                //   var_dump($key, '===>', $value);
+                // }
+                $bind = @ldap_bind($this->ldapconn, $binddn, $password);
                 if(! $bind) {
                     $error = "Credenciales invalidas";
                     $this->_audit("Failed login attempt: ".$username." from ".$_SERVER['REMOTE_ADDR']);
                 }else{
-                    $error = ""; //En este punto la contraseña y el usuario son correctos
+                  $checkGroup = FALSE;
+                  if (isset($entries[0]['memberof']) && !empty($cantidadGrupos = $entries[0]['memberof']['count'])){
+                    for ($i = 0; $i<$cantidadGrupos; $i++){
+                      if (strpos(strtolower($entries[0]['memberof'][$i]), 'cn=cotizaciones')!==FALSE){
+                        $checkGroup = TRUE;
+                      }
+                    }
+                  }
+
                 }
-                $cn = $entries[0]['cn'][0];
-                $dn = stripslashes($entries[0]['dn']);
-                $id = $entries[0][$this->login_attribute][0];
-                $role = 'user'; //TODO: realizar manejo de roles
-                //en este punto el usuario se encontro y puede o no estar autenticado dependiendo del contenido de la variable $error
+
+                if (isset($checkGroup) && $checkGroup === FALSE){
+                  $cn = "";
+                  $dn = "";
+                  $id = "";
+                  $role = "";
+                  $role ="";
+                  $error = "Usuario no autorizado";
+                  $this->_audit('Usuario no autorizado');
+                }
+                else{
+                  $cn = $entries[0]['cn'][0];
+                  $dn = stripslashes($entries[0]['dn']);
+                  $id = $entries[0][$this->login_attribute][0];
+                  $role = 'user'; //TODO: realizar manejo de roles
+                  //en este punto el usuario se encontro y puede o no estar autenticado dependiendo del contenido de la variable $error
+                }
+
             }
-        
-        
+
+
         }else { //en este else se entra si la primer conexión al servidor falla
             $cn = "";
             $dn = "";
             $id = "";
-            $role = ""; 
+            $role = "";
             $role ="";
             $error = "Error en la conexión al servidor.";
             $this->_audit('Error en la conexión al servidor.');
         }
-        
-        return array('cn' => $cn, 'dn' => $dn, 'id' => $id,
-        'role' => $role ,'error'=>$error);
-                 
+
+        $return = array('cn' => $cn, 'dn' => $dn, 'id' => $id,
+        'role' => $role ,'error'=>isset($error)?$error:NULL, 'binddn'=>isset($binddn)?$binddn:NULL);
+        // var_dump($return); exit;
+        return $return;
+
     }
 
     /**
      * @access private
      * @param string $str
      * @param bool $for_dn
-     * @return string 
+     * @return string
      */
     private function ldap_escape($str, $for_dn = false) {
         /**
@@ -252,8 +296,8 @@ class CI_Auth_ldap extends CI_Controller{
         // see:
         // RFC2254
         // http://msdn.microsoft.com/en-us/library/ms675768(VS.85).aspx
-        // http://www-03.ibm.com/systems/i/software/ldap/underdn.html  
-        
+        // http://www-03.ibm.com/systems/i/software/ldap/underdn.html
+
         if  ($for_dn)
             $metaChars = array(',','=', '+', '<','>',';', '\\', '"', '#');
         else
@@ -262,9 +306,9 @@ class CI_Auth_ldap extends CI_Controller{
         $quotedMetaChars = array();
         foreach ($metaChars as $key => $value) $quotedMetaChars[$key] = '\\'.str_pad(dechex(ord($value)), 2, '0');
         $str=str_replace($metaChars,$quotedMetaChars,$str); //replace them
-        return ($str);  
+        return ($str);
     }
-    
+
     /**
      * @access private
      * @param string $username
@@ -280,14 +324,14 @@ class CI_Auth_ldap extends CI_Controller{
         }
         $results = ldap_get_entries($this->ldapconn, $search);
         /*echo '<h1>Resultado de roles</h1><pre>';
-        print_r($results);   
+        print_r($results);
         echo '</pre>';*/
         if($results['count'] != 0) {
             for($i = 0; $i < $results['count']; $i++) {
                 $role = array_search($results[$i]['cn'][0], $this->roles);
                 echo $role;
                 if($role !== FALSE) {
-                    
+
                     return $role;
                 }
             }
