@@ -310,6 +310,7 @@
     $('#modal-edicion').on('show.bs.modal', function(e) {
         //{"modelo":"ProductosModel","valores":{"id":"26","descripcion_producto":"tarjetas nuevas","id_grupo":"2","cod_sap":"0000"}}
         //console.log(id_producto);
+        var modelo = 'GruposModel';
         var filtrosNull = {};
         var valoresSelect = new toJson(modelo, filtrosNull, null);
         var jsonString = JSON.stringify(valoresSelect);
@@ -324,13 +325,16 @@
             }
         }).done(function(response) {
             var responseJP = JSON.parse(response); //esto se recibe con formato Json pero en variable string
-            //console.log(responseJP['data'][0].descripcion_producto);
+            //console.log(responseJP['data'].descripcion_producto);
+           
 
             $.each(responseJP['data'], function(key, valor) {
+                console.log(valor);
                 $("#id_grupo").append(`<option id=${valor.id_producto} value=${valor.id_grupo}>${valor.descripcion_grupo}</option>`);
             });
         });
 
+        var modelo = 'ProductosModel';
         if (id_producto != "") { //si el id no es vacio, quiere decir que es una edición del registro y no una inserción
             
             var valoresSelect = new toJson(modelo, filtros, null)
