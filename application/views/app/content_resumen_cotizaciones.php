@@ -13,16 +13,13 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <!--
-                      <div class="card-header">
-                          <div class="row align-items-center">
-                              <span class="card-title">Agregar Producto</span>
-                              <button data-toggle="modal" data-target="#modal-edicion" class="btn" id="nuevoProducto"><i class="far fa-plus-square btn"></button></i>
-                          </div>
-                      </div>--->
-                    <!-- /.card-header -->
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <span class="card-title">Buscador de operaciones-Se desea traer todas las operaciones solo oprima "Buscar" en la parte inferior</span>
+                        </div>
+                    </div>
                     <div class="card-body">
-                        <form id="formDatosCotizacion" method="post" action="<?php echo site_url('/DevelAdmin/resumen_cotizaciones')?>">
+                        <form id="formDatosCotizacion" method="post" action="<?php echo site_url('/DevelAdmin/resumen_cotizaciones') ?>">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-3">
@@ -31,8 +28,8 @@
                                             <select class="form-control select2" id="id_cliente" name="id_cliente" style="width: 100%;">
                                                 <option class="selected"></option>
                                                 <?php if (!empty($clientes)) : ?>
-                                                    <?php foreach ($clientes as $cliente): ?>
-                                                        <option value="<?php echo $cliente['id_cliente']?>" <?php if (!empty($filtros['id_cliente']) && $filtros['id_cliente']==$cliente['id_cliente']) : ?>selected<?php endif; ?>><?php echo $cliente['nombre_cliente']?></option>
+                                                    <?php foreach ($clientes as $cliente) : ?>
+                                                        <option value="<?php echo $cliente['id_cliente'] ?>" <?php if (!empty($filtros['id_cliente']) && $filtros['id_cliente'] == $cliente['id_cliente']) : ?>selected<?php endif; ?>><?php echo $cliente['nombre_cliente'] ?></option>
                                                     <?php endforeach; ?>
                                                 <?php endif; ?>
                                             </select>
@@ -44,8 +41,8 @@
                                             <select class="form-control select2" id="id_estado_coti" name="id_estado_coti" style="width: 100%;">
                                                 <option class="selected"></option>
                                                 <?php if (!empty($estados_cotizacion)) : ?>
-                                                    <?php foreach ($estados_cotizacion as $EC): ?>
-                                                        <option value="<?php echo $EC['id_estado_coti']?>" <?php if (!empty($filtros['id_estado_coti']) && $filtros['id_estado_coti']==$EC['id_estado_coti']) : ?>selected<?php endif; ?>><?php echo $EC['estado_cotizacion']?></option>
+                                                    <?php foreach ($estados_cotizacion as $EC) : ?>
+                                                        <option value="<?php echo $EC['id_estado_coti'] ?>" <?php if (!empty($filtros['id_estado_coti']) && $filtros['id_estado_coti'] == $EC['id_estado_coti']) : ?>selected<?php endif; ?>><?php echo $EC['estado_cotizacion'] ?></option>
                                                     <?php endforeach; ?>
                                                 <?php endif; ?>
                                             </select>
@@ -54,14 +51,14 @@
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label for="numero_cotizacion">Numero cotización</label>
-                                            <input type="text" name="numero_cotizacion" class="form-control" id="numero_cotizacion" placeholder="Numero cotización" <?php if (!empty($filtros['numero_cotizacion'])) : ?>value="<?php echo $filtros['numero_cotizacion']?>"<?php endif?> />
+                                            <input type="text" name="numero_cotizacion" class="form-control" id="numero_cotizacion" placeholder="Numero cotización" <?php if (!empty($filtros['numero_cotizacion'])) : ?>value="<?php echo $filtros['numero_cotizacion'] ?>" <?php endif ?> />
                                         </div>
                                     </div>
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label>Fecha cotización</label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control"  id="fecha_cotizacion" data-target="#fecha_cotizacion" name="fecha_cotizacion" value="<?php if (!empty($filtros['fecha_cotizacion'])) : ?><?php echo $filtros['fecha_cotizacion']?><?php endif?>" />
+                                                <input type="text" class="form-control" id="fecha_cotizacion" data-target="#fecha_cotizacion" name="fecha_cotizacion" value="<?php if (!empty($filtros['fecha_cotizacion'])) : ?><?php echo $filtros['fecha_cotizacion'] ?><?php endif ?>" />
                                                 <div class="input-group-append" data-target="#fecha_cotizacion">
                                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                 </div>
@@ -76,8 +73,8 @@
                                             <select class="form-control select2" id="id_producto" name="id_producto" style="width: 100%;">
                                                 <option class="selected"></option>
                                                 <?php if (!empty($productos)) : ?>
-                                                    <?php foreach ($productos as $producto): ?>
-                                                        <option value="<?php echo $producto['id_producto']?>" <?php if (!empty($filtros['id_producto']) && $filtros['id_producto']==$producto['id_producto']) : ?>selected<?php endif; ?>><?php echo $producto['descripcion_producto']?></option>
+                                                    <?php foreach ($productos as $producto) : ?>
+                                                        <option value="<?php echo $producto['id_producto'] ?>" <?php if (!empty($filtros['id_producto']) && $filtros['id_producto'] == $producto['id_producto']) : ?>selected<?php endif; ?>><?php echo $producto['descripcion_producto'] ?></option>
                                                     <?php endforeach; ?>
                                                 <?php endif; ?>
                                                 <!--TODO: al seleccionar el producto se debe guardar en la base de datos el grupo y el cod sap-->
@@ -90,8 +87,8 @@
                                             <select class="form-control select2" id="id_moneda_coti" name="id_moneda_coti" style="width: 100%;">
                                                 <option class="selected"></option>
                                                 <?php if (!empty($monedas)) : ?>
-                                                    <?php foreach ($monedas as $moneda): ?>
-                                                        <option value="<?php echo $moneda['id_moneda']?>" <?php if (!empty($filtros['id_moneda_coti']) && $filtros['id_moneda_coti']==$moneda['id_moneda']) : ?>selected<?php endif; ?>><?php echo $moneda['moneda']?></option>
+                                                    <?php foreach ($monedas as $moneda) : ?>
+                                                        <option value="<?php echo $moneda['id_moneda'] ?>" <?php if (!empty($filtros['id_moneda_coti']) && $filtros['id_moneda_coti'] == $moneda['id_moneda']) : ?>selected<?php endif; ?>><?php echo $moneda['moneda'] ?></option>
                                                     <?php endforeach; ?>
                                                 <?php endif; ?>
                                             </select>
@@ -103,8 +100,8 @@
                                             <select class="form-control select2" id="id_moneda_pres" name="id_moneda_pres" style="width: 100%;">
                                                 <option class="selected"></option>
                                                 <?php if (!empty($monedas)) : ?>
-                                                    <?php foreach ($monedas as $moneda): ?>
-                                                        <option value="<?php echo $moneda['id_moneda']?>" <?php if (!empty($filtros['id_moneda_pres']) && $filtros['id_moneda_pres']==$moneda['id_moneda']) : ?>selected<?php endif; ?>><?php echo $moneda['moneda']?></option>
+                                                    <?php foreach ($monedas as $moneda) : ?>
+                                                        <option value="<?php echo $moneda['id_moneda'] ?>" <?php if (!empty($filtros['id_moneda_pres']) && $filtros['id_moneda_pres'] == $moneda['id_moneda']) : ?>selected<?php endif; ?>><?php echo $moneda['moneda'] ?></option>
                                                     <?php endforeach; ?>
                                                 <?php endif; ?>
                                             </select>
@@ -113,31 +110,31 @@
                                 </div>
 
                                 <div class="row">
-<!--                                    <div class="col-4">-->
-<!--                                        <div class="form-group">-->
-<!--                                            <label for="cantidad">Cantidad</label>-->
-<!--                                            <input type="text" name="cantidad" class="form-control" id="cantidad" placeholder="Cantidad">-->
-<!--                                        </div>-->
-<!--                                    </div>-->
+                                    <!--                                    <div class="col-4">-->
+                                    <!--                                        <div class="form-group">-->
+                                    <!--                                            <label for="cantidad">Cantidad</label>-->
+                                    <!--                                            <input type="text" name="cantidad" class="form-control" id="cantidad" placeholder="Cantidad">-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
 
-<!--                                    <div class="col-4">-->
-<!--                                        <div class="form-group">-->
-<!--                                            <label for="valor_dolar">Valor dolar</label>-->
-<!--                                            <input type="text" name="valor_dolar" class="form-control" id="valor_dolar" placeholder="Costo">-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="col-4">-->
-<!--                                        <div class="form-group">-->
-<!--                                            <label for="costo">Costo</label>-->
-<!--                                            <input type="text" name="costo" class="form-control" id="costo" placeholder="Costo">-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="col-4">-->
-<!--                                        <div class="form-group">-->
-<!--                                            <label for="precio_unitario">Precio unitario</label>-->
-<!--                                            <input type="text" name="precio_unitario" class="form-control" id="precio_unitario" placeholder="Precio unitario">-->
-<!--                                        </div>-->
-<!--                                    </div>-->
+                                    <!--                                    <div class="col-4">-->
+                                    <!--                                        <div class="form-group">-->
+                                    <!--                                            <label for="valor_dolar">Valor dolar</label>-->
+                                    <!--                                            <input type="text" name="valor_dolar" class="form-control" id="valor_dolar" placeholder="Costo">-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
+                                    <!--                                    <div class="col-4">-->
+                                    <!--                                        <div class="form-group">-->
+                                    <!--                                            <label for="costo">Costo</label>-->
+                                    <!--                                            <input type="text" name="costo" class="form-control" id="costo" placeholder="Costo">-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
+                                    <!--                                    <div class="col-4">-->
+                                    <!--                                        <div class="form-group">-->
+                                    <!--                                            <label for="precio_unitario">Precio unitario</label>-->
+                                    <!--                                            <input type="text" name="precio_unitario" class="form-control" id="precio_unitario" placeholder="Precio unitario">-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
                                 </div>
                                 <div class="row">
                                     <div class="col-3">
@@ -146,8 +143,8 @@
                                             <select class="form-control select2" id="id_estado_oc" name="id_estado_oc" style="width: 100%;">
                                                 <option class="selected"></option>
                                                 <?php if (!empty($estados_oc)) : ?>
-                                                    <?php foreach ($estados_oc as $estado_oc): ?>
-                                                        <option value="<?php echo $estado_oc['id_estado_oc']?>" <?php if (!empty($filtros['id_estado_oc']) && $filtros['id_estado_oc']==$estado_oc['id_estado_oc']) : ?>selected<?php endif; ?>><?php echo $estado_oc['estado_oc']?></option>
+                                                    <?php foreach ($estados_oc as $estado_oc) : ?>
+                                                        <option value="<?php echo $estado_oc['id_estado_oc'] ?>" <?php if (!empty($filtros['id_estado_oc']) && $filtros['id_estado_oc'] == $estado_oc['id_estado_oc']) : ?>selected<?php endif; ?>><?php echo $estado_oc['estado_oc'] ?></option>
                                                     <?php endforeach; ?>
                                                 <?php endif; ?>
                                             </select>
@@ -159,24 +156,24 @@
                                             <select class="form-control select2" id="id_empresas" name="id_empresas" style="width: 100%;">
                                                 <option class="selected"></option>
                                                 <?php if (!empty($empresas)) : ?>
-                                                    <?php foreach ($empresas as $empresa): ?>
-                                                        <option value="<?php echo $empresa['id_empresa']?>" <?php if (!empty($filtros['id_empresas']) && $filtros['id_empresas']==$empresa['id_empresa']) : ?>selected<?php endif; ?>><?php echo $empresa['empresa']?></option>
+                                                    <?php foreach ($empresas as $empresa) : ?>
+                                                        <option value="<?php echo $empresa['id_empresa'] ?>" <?php if (!empty($filtros['id_empresas']) && $filtros['id_empresas'] == $empresa['id_empresa']) : ?>selected<?php endif; ?>><?php echo $empresa['empresa'] ?></option>
                                                     <?php endforeach; ?>
                                                 <?php endif; ?>
                                             </select>
                                         </div>
                                     </div>
-<!--                                    <div class="col-4">-->
-<!--                                        <div class="form-group">-->
-<!--                                            <label for="precio_ganador">Precio ganador</label>-->
-<!--                                            <input type="text" name="precio_ganador" class="form-control" id="precio_ganador" placeholder="Precio ganador">-->
-<!--                                        </div>-->
-<!--                                    </div>-->
+                                    <!--                                    <div class="col-4">-->
+                                    <!--                                        <div class="form-group">-->
+                                    <!--                                            <label for="precio_ganador">Precio ganador</label>-->
+                                    <!--                                            <input type="text" name="precio_ganador" class="form-control" id="precio_ganador" placeholder="Precio ganador">-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label>Fecha OC</label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control" id="fecha_oc" data-target="#fecha_oc" name="fecha_oc" value="<?php if (!empty($filtros['fecha_oc'])) : ?><?php echo $filtros['fecha_oc']?><?php endif?>" />
+                                                <input type="text" class="form-control" id="fecha_oc" data-target="#fecha_oc" name="fecha_oc" value="<?php if (!empty($filtros['fecha_oc'])) : ?><?php echo $filtros['fecha_oc'] ?><?php endif ?>" />
                                                 <div class="input-group-append" data-target="#fecha_oc">
                                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                 </div>
@@ -189,24 +186,24 @@
                                             <select class="form-control select2" id="id_estado_produccion" name="id_estado_produccion" style="width: 100%;">
                                                 <option class="selected"></option>
                                                 <?php if (!empty($estados_produccion)) : ?>
-                                                    <?php foreach ($estados_produccion as $EP): ?>
-                                                        <option value="<?php echo $EP['id_estado-produccion']?>" <?php if (!empty($filtros['id_estado_produccion']) && $filtros['id_estado_produccion']==$EP['id_estado-produccion']) : ?>selected<?php endif; ?>><?php echo $EP['estado_produccion']?></option>
+                                                    <?php foreach ($estados_produccion as $EP) : ?>
+                                                        <option value="<?php echo $EP['id_estado-produccion'] ?>" <?php if (!empty($filtros['id_estado_produccion']) && $filtros['id_estado_produccion'] == $EP['id_estado-produccion']) : ?>selected<?php endif; ?>><?php echo $EP['estado_produccion'] ?></option>
                                                     <?php endforeach; ?>
                                                 <?php endif; ?>
                                             </select>
                                         </div>
                                     </div>
-<!--                                    <div class="col-4">-->
-<!--                                        <div class="form-group">-->
-<!--                                            <label for="cantidad_entregada">Cantidad entregada</label>-->
-<!--                                            <input type="text" name="cantidad_entregada" class="form-control" id="cantidad_entregada" placeholder="Cantidad entregada">-->
-<!--                                        </div>-->
-<!--                                    </div>-->
+                                    <!--                                    <div class="col-4">-->
+                                    <!--                                        <div class="form-group">-->
+                                    <!--                                            <label for="cantidad_entregada">Cantidad entregada</label>-->
+                                    <!--                                            <input type="text" name="cantidad_entregada" class="form-control" id="cantidad_entregada" placeholder="Cantidad entregada">-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
                                 </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Buscar</button>
                             </div>
                         </form>
                     </div>
@@ -238,7 +235,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                  <!--
+                    <!--
                     <div class="card-header">
                         <div class="row align-items-center">
                             <span class="card-title">Agregar Producto</span>
@@ -286,8 +283,8 @@
 
     <?php if (!empty($filtros)) : ?>
         <?php foreach ($filtros as $key => $value) : ?>
-            filtros.<?php echo $key?> = '<?php echo $value?>'
-        <?php endforeach ;?>
+            filtros.<?php echo $key ?> = '<?php echo $value ?>'
+        <?php endforeach; ?>
     <?php endif; ?>
 
     function cargarDataTable() {
@@ -373,7 +370,7 @@
                         html += '</div>';
                         html += '</div>';
                         return html;
-                    }//TODO: agregar botonos de ver mas. Estos botonos llevaran a otra pagina
+                    } //TODO: agregar botonos de ver mas. Estos botonos llevaran a otra pagina
                 }
             ]
         });
@@ -390,7 +387,7 @@
         width: '40rem'
     });
     //----------------------------------------- manejo de eventos------------------------------
-    
+
     //evento que se desata al momento de hacer click en el boton de edición de cada item del datatables
     $('#tablaCotizaciones').on('click', '.editarProducto', function() {
         //console.log('click en edición de producto');
@@ -399,7 +396,7 @@
         //con estas lineas se levanta el id a editar
         filtros['id'] = id_cotizacion;
         console.log(id)
-        window.location = '<?php echo site_url()?>/DevelAdmin/form_cotizaciones/'+id_cotizacion;
+        window.location = '<?php echo site_url() ?>/DevelAdmin/form_cotizaciones/' + id_cotizacion;
     });
     //evento que se desata al momento de hacer click en el icono de borrar registro
     $('#tablaCotizaciones').on('click', '.borrarProducto', function() {
@@ -412,7 +409,7 @@
         // var peticionJsonString = JSON.stringify(peticionJson);
         //console.log(peticionJsonString);
         Swal.fire({
-            title: 'Desea eliminar la cotización id '+id_cotizacion+'?' ,
+            title: 'Desea eliminar la cotización id ' + id_cotizacion + '?',
             text: "Luego de aceptar no podra revertir la acción.",
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -424,10 +421,10 @@
             if (result.value) {
 
                 $.ajax({
-                    type: 'POST',
-                    url: '<?php echo site_url()?>/DevelAdmin/delete_cotizaciones/'+id_cotizacion,
-                    dataType: 'json'
-                })
+                        type: 'POST',
+                        url: '<?php echo site_url() ?>/DevelAdmin/delete_cotizaciones/' + id_cotizacion,
+                        dataType: 'json'
+                    })
                     .done(function(response) {
                         console.log(response)
 
@@ -473,5 +470,4 @@
     }, function(start, end, label) {
         $('#fecha_oc').val(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'))
     });
-    
 </script>
