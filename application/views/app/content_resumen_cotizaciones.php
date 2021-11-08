@@ -15,7 +15,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row align-items-center">
-                            <span class="card-title">Buscador de operaciones-Se desea traer todas las operaciones solo oprima "Buscar" en la parte inferior</span>
+                            <span class="card-title">Buscador de operaciones-Si desea ver todas las operaciones solo oprima "Buscar" en la parte inferior</span>
                         </div>
                     </div>
                     <div class="card-body">

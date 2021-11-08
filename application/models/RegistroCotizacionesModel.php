@@ -217,7 +217,7 @@ class RegistroCotizacionesModel extends MY_Model{
           $return['margen'] = FALSE;
       }
       $return['impuestos'] = !empty($return['facturacion'])?$return['facturacion']*0.025:FALSE;
-      $return['cmg_moneda'] = !empty($return['facturacion']) && !empty($return['costo_total'])?floatval($return['facturacion']-$return['costo_total']):FALSE;
+      $return['cmg_moneda'] = !empty($return['facturacion']) && !empty($return['costo_total'])?floatval($return['facturacion']-$return['costo_total']-$return['impuestos']):FALSE;
       $return['cmg_porcentaje'] = $return['cmg_moneda']!==FALSE && !empty($return['facturacion']) ? floatval(round($return['cmg_moneda'] / $return['facturacion'] * 100, 2)):FALSE;
 
 //      $return['diferencia_sobreUB'] =
