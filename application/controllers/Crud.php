@@ -71,6 +71,7 @@ class Crud extends CI_Controller
     //forma: {"modelo":"ProductosModel","valores":[{"id":"26","descripcion_producto":"tarjetas nuevas","id_grupo":"2","cod_sap":"0000"}]}
     $id = null; //se asume id como null (si es asi es una inserción de un registro)
 
+  
     //con el siguiente if se evalua si el metodo guardar_proceso recibio algun dato del formulario de la pagina o simplemente fue llamado para cargar la vista
     if (!$_POST) {
       $data = array(
@@ -90,6 +91,7 @@ class Crud extends CI_Controller
       //se reciben los datos por json 
       $json = json_decode($_POST['json'], true);
 
+     
       if (isset($json['modelo']) && !empty($json['modelo']) && isset($json['valores'])) {
         $valores = $json['valores'];
         $modelo = $json['modelo'];
@@ -110,7 +112,7 @@ class Crud extends CI_Controller
         if ($this->form_validation->run()) {
           //en este punto nuestro formulario es valido
           if ($id == null) { //se evalua si es un registro nvo o un update y se direcciona al metodo que corresponda
-            //print_r($to_save);
+            //print_r($valores); die();
             if ($this->$modelo->insert($valores)) { //se llama al modelo donde se especifica la tabla donde insertar los datos. Esta clase extiende de CI_Model en donde creamos los metodos del CRUD (entre ellos el insert)
               $data = array(
                 'status'            => 'success',
@@ -133,6 +135,7 @@ class Crud extends CI_Controller
               'id' => $valores['id']
             );
             $count = $this->$modelo->find($filtros); //se evalua si el id existe en la bd
+            
             if (!empty($count) && $this->$modelo->update($valores, $id)) {
               $data = array(
                 'status'            => 'success',
@@ -175,7 +178,7 @@ class Crud extends CI_Controller
           'data'            => ''
         );
         $dataJ = json_encode($data);
-        if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un return
+        if ($this->input->is_ajax_request()) { //si la peticion la hace un ajax, realiza un echo para poder, si no un echo
           echo $dataJ;
         } else {
           echo $dataJ;

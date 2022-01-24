@@ -248,13 +248,32 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
+                                    <th>Estado de cotización</th> <!--ocultar-->
                                     <th>Cliente</th>
                                     <th>Fecha</th>
+                                    <th>Valor dolar</th> <!--ocultar-->
+                                    <th># cotización</th>
                                     <th>Producto</th>
                                     <th>Cantidad</th>
+                                    <th>Moneda cotización</th> <!--ocultar-->
                                     <th>Costo</th>
+                                    <th>Costo total</th> <!--ocultar-->
+                                    <th>Moneda presentación</th>
                                     <th>Precio</th>
+                                    <th>Facturación</th> <!--ocultar-->
                                     <th>Margen</th>
+                                    <th>Impuestos</th> <!--ocultar-->
+                                    <th>Cmg</th>
+                                    <th>Cmg %</th>
+                                    <th>Empresa ganadora</th>
+                                    <th>Precio ganador</th>
+                                    <th>Diferencia sobre UB</th> <!--ocultar-->
+                                    <th>Margen sobre UB</th> <!--ocultar-->
+                                    <th>Estado OC</th> <!--ocultar-->
+                                    <th>Fecha OC</th> <!--ocultar-->
+                                    <th>Estado producción</th> <!--ocultar-->
+                                    <th>Cantidad entregada</th> <!--ocultar-->
+                                    <th>Cantidad pendiente</th> <!--ocultar-->
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -329,25 +348,118 @@
                     }
                 },
                 {
+                    data: 'estado_cotizacion'
+                },
+                {
                     data: 'nombre_cliente'
                 },
                 {
-                    data: 'fecha_cotizacion'
+                    data: function(data) {
+                        fecha_cotizacion = new Date(data['fecha_cotizacion']);
+                        return fecha_cotizacion.toLocaleString().substring(0,10);
+                        //return fecha_cotizacion;
+                    }
+                    
+                },
+                {
+                    data: 'valor_dolar'
+                },
+                {
+                    data: 'numero_cotizacion'
                 },
                 {
                     data: 'descripcion_producto'
                 },
                 {
-                    data: 'cantidad'
+                    data: function(data){
+                        cantidad_total = data['cantidad'];
+                        var str = cantidad_total.toString().split(".");
+                        str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        return str.join(".");
+
+                       // return cantidad_total.format('00[.]0');  //format('$0,0.00');
+                    }
+                    //data: 'cantidad'
                 },
                 {
-                    data: 'costo'
+                    data: function(data) {
+                        if (data['id_moneda_coti']==1) {
+                            moneda_cotizacion = '$';
+                        }
+                        if (data['id_moneda_coti']==2) {
+                            moneda_cotizacion = 'U$D';
+                        }
+                        return moneda_cotizacion;
+                    }
+                },
+                {
+                    data: function(data){
+                        return data['costo'];
+                    }
+                },
+                {
+                    data: function(data){
+                        valor_costo_total = numeral (data['costo_total']);
+                        formato = '0,0.000';
+                        //console.log(formato);
+                        return data['costo_total'];  //format('$0,0.00');
+                    }
+                },
+                {
+                    data: function(data) {
+                        if (data['id_moneda_pres']==1) {
+                            moneda_presentacion = '$';
+                        }
+                        if (data['id_moneda_pres']==2) {
+                            moneda_presentacion = 'U$D';
+                        }
+                        return moneda_presentacion;
+                    }
                 },
                 {
                     data: 'precio_unitario'
                 },
                 {
+                    data: 'facturacion'
+                },
+                {
                     data: 'margen'
+                },
+                {
+                    data: 'impuestos'
+                },
+                {
+                    data: 'cmg_moneda'
+                },
+                {
+                    data: 'cmg_porcentaje'
+                },
+                {
+                    data: 'empresa'
+                },
+                {
+                    data: 'precio_ganador'
+                },
+                {
+                    data: 'diferencia_sobreUB'
+                },
+                {
+                    data: 'margen_sobreUB'
+                },
+                {
+                    data: 'estado_oc'
+                },
+                {
+                    data: 'fecha_oc'
+                },
+                {
+                    data: 'estado_produccion'
+                },
+                {
+                    data: 'cantidad_entregada'
+                },
+                {
+                    data: 'cantidad_pendiente'
                 },
                 {
                     data: null,

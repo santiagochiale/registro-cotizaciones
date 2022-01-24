@@ -191,6 +191,7 @@ class DevelAdmin extends CI_Controller
 
   public function form_cotizaciones($id=null)
   {
+     
       $incompleto = FALSE;
       if (!empty($post = $this->input->post())){
           foreach ($post as $key => $value){
@@ -200,10 +201,12 @@ class DevelAdmin extends CI_Controller
           }
           if (!is_null($id)){
               $post['id_cotizacion'] = $id;
+              
           }
           if ($incompleto === FALSE){
+               
               $cotizacion_id = $this->RegistroCotizacionesModel->altaCotizacion($post);
-
+              
               if (!empty($cotizacion_id)){
 //              redirect('form_cotizaciones/'.$cotizacion_id);
                   redirect('DevelAdmin/resumen_cotizaciones');
@@ -246,13 +249,15 @@ class DevelAdmin extends CI_Controller
       if ($this->input->is_ajax_request() && !empty($post = $this->input->post())){
           $post = $this->RegistroCotizacionesModel->formatear_campos_formulario($post);
 
-          $data = $this->RegistroCotizacionesModel->calcularVariables($post);
-
           $moneda_cotizacion = !empty($post['moneda_cotizacion'])?$post['moneda_cotizacion']:'$';
           $moneda_presentacion = !empty($post['moneda_presentacion'])?$post['moneda_presentacion']:'$';
 
+          $data = $this->RegistroCotizacionesModel->calcularVariables($post);
+
+          
           if (!empty($data['facturacion'])){
-              $data['facturacion'] = $moneda_cotizacion.' '.number_format($data['facturacion'], 2, ',', '.');
+              
+              $data['facturacion'] = $moneda_presentacion.' '.number_format($data['facturacion'], 2, ',', '.');
           }
 
           if (!empty($data['costo_total'])){
@@ -264,11 +269,11 @@ class DevelAdmin extends CI_Controller
           }
 
           if (!empty($data['impuestos'])){
-              $data['impuestos'] = $moneda_cotizacion.' '.number_format($data['impuestos'], 2, ',', '.');
+              $data['impuestos'] = $moneda_presentacion.' '.number_format($data['impuestos'], 2, ',', '.');
           }
 
           if (!empty($data['cmg_moneda'])){
-              $data['cmg_moneda'] = $moneda_cotizacion.' '.number_format($data['cmg_moneda'], 2, ',', '.');
+              $data['cmg_moneda'] = $moneda_presentacion.' '.number_format($data['cmg_moneda'], 2, ',', '.');
           }
 
           if (!empty($data['cmg_porcentaje'])){
@@ -280,7 +285,7 @@ class DevelAdmin extends CI_Controller
           }
 
           if (!empty($data['precio_ganador'])){
-              $data['precio_ganador'] = $moneda_cotizacion.' '.number_format($data['precio_ganador'], 2, ',', '.');
+              $data['precio_ganador'] = $moneda_presentacion.' '.number_format($data['precio_ganador'], 2, ',', '.');
           }
 
           if (!empty($data['cantidad_pendiente'])){

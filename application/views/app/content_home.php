@@ -295,6 +295,7 @@
                     </div>
                 </div>
                 <!-- ./col -->
+                
                 <div class="col-lg-6 col-12">
                     <!-- small box -->
                     <div class="small-box bg-success">

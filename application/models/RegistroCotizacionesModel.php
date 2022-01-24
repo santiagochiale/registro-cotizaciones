@@ -13,7 +13,7 @@ class RegistroCotizacionesModel extends MY_Model{
     "grupos"                   => "grupos.id_grupo=registro_cotizaciones.id_grupo",
     "productos"                => "productos.id_producto=registro_cotizaciones.id_producto",
     "monedas"                  => "monedas.id_moneda=registro_cotizaciones.id_moneda_coti", 
-    "monedas"                  => "monedas.id_moneda=registro_cotizaciones.id_moneda_pres",
+    "monedas"                  => "monedas.id_moneda=registro_cotizaciones.id_moneda_pres"
 
   );
 
@@ -169,8 +169,10 @@ class RegistroCotizacionesModel extends MY_Model{
       $data['fecha_oc'] = !empty($data['fecha_oc'])?date('Y-m-d', strtotime(str_replace('/', '-', $data['fecha_oc']))):NULL;
 
       $data = $this->formatear_campos_formulario($data);
+    //   echo '$data <br><pre>';print_r($data); echo '</pre><br>';
 
       $data_calculada = $this->calcularVariables($data);
+       //echo '$data calculada <pre>';print_r($data_calculada); echo '</pre><br>';die();
 
       $data = array_merge($data, $data_calculada);
       //TODO falta diferencia_sobreUB
@@ -188,36 +190,49 @@ class RegistroCotizacionesModel extends MY_Model{
   }
 
   public function calcularVariables($data){
-//      var_dump($data); //exit;
-      if (empty($data['moneda_cotizacion'])){
-          $data['moneda_cotizacion'] = '$';
+     //var_dump($data);
+
+       
+
+      if (empty($data['id_moneda_coti'])){
+          $data['id_moneda_coti'] = '1';
       }
-      if (empty($data['moneda_presentacion'])){
-          $data['moneda_presentacion'] = '$';
+      if (empty($data['id_moneda_pres'])){
+          $data['id_moneda_pres'] = '1';
       }
 
       $valor_cotizacion = 1;
-
-//      if ($data['moneda_presentacion']<>$data['moneda_cotizacion']){
-//          if ($data['moneda_presentacion'] == '$'){
-//              $valor_cotizacion = !empty($data['valor_dolar'])?$data['valor_dolar']:0;
-//          }
-//          elseif ($data['moneda_cotizacion'] == '$'){
-//              $valor_cotizacion =!empty($data['valor_dolar'])?1/$data['valor_dolar']:0;
-//          }
-//      }
-
+      $valor_presentacion = 1;
+     //aqui se evaluan los casos donde las monedas de cotización y presentación son distintas 
+     if ($data['id_moneda_pres']<>$data['id_moneda_coti']){
+         //moneda de cotización en dolares y presentación en pesos
+         if ($data['id_moneda_coti'] == '2' and $data['id_moneda_pres'] == '1'){
+            // echo 'dentro del if de coti en usd y pres $ <br>';
+             $valor_presentacion = 1/$data['valor_dolar'];
+             
+             
+         }
+         //moneda de cotización en pesos y presentación en dolares
+         if ($data['id_moneda_coti'] == '1' and $data['id_moneda_pres'] == '2'){
+            // echo 'dentro del if de coti en $ y pres usd <br>';
+            $valor_presentacion = $data['valor_dolar'];
+           
+        }
+     }
+    //  echo $valor_presentacion.'<br>';
+    //  exit();
       $return['facturacion'] = $valor_cotizacion*$this->calcularTotal(!empty($data['cantidad'])?$data['cantidad']:0, !empty($data['precio_unitario'])?$data['precio_unitario']:0);
       $return['costo_total'] = $valor_cotizacion*$this->calcularTotal(!empty($data['cantidad'])?$data['cantidad']:0, !empty($data['costo'])?$data['costo']:0);
-//      var_dump($return); exit;
+     
       if (!empty($data['precio_unitario']) && !empty($data['costo'])){
-          $return['margen'] = floatval(round((($data['precio_unitario'] / $data['costo'])-1) * 100, 2));
+          $return['margen'] = floatval(round((($valor_presentacion*$data['precio_unitario'] / $data['costo'])-1) * 100, 2));
       }
       else{
           $return['margen'] = FALSE;
       }
+     
       $return['impuestos'] = !empty($return['facturacion'])?$return['facturacion']*0.025:FALSE;
-      $return['cmg_moneda'] = !empty($return['facturacion']) && !empty($return['costo_total'])?floatval($return['facturacion']-$return['costo_total']-$return['impuestos']):FALSE;
+      $return['cmg_moneda'] = !empty($return['facturacion']) && !empty($return['costo_total'])?floatval($return['facturacion']-$return['costo_total']/$valor_presentacion-$return['impuestos']):FALSE;
       $return['cmg_porcentaje'] = $return['cmg_moneda']!==FALSE && !empty($return['facturacion']) ? floatval(round($return['cmg_moneda'] / $return['facturacion'] * 100, 2)):FALSE;
 
 //      $return['diferencia_sobreUB'] =
@@ -225,11 +240,8 @@ class RegistroCotizacionesModel extends MY_Model{
       $return['cantidad_pendiente'] = !empty($data['cantidad']) ? $data['cantidad'] - (!empty($data['cantidad_entregada'])?$data['cantidad_entregada']:0) : FALSE;
 
       $return['precio_ganador'] = !empty($data['precio_ganador']) ? $valor_cotizacion*$data['precio_ganador'] : FALSE;
-
+    //   var_dump($return); exit;
       return $return;
-
-
-
   }
 
   private function calcularTotal($cantidad, $valor_unitario){

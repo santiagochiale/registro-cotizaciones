@@ -98,6 +98,8 @@
   <script src="<?php echo base_url(); ?>/assets/plugins/inputmask/jquery.inputmask.min.js"></script>
   <!-- date-range-picker -->
   <script src="<?php echo base_url(); ?>/assets/plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- script para formatear numeros -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
   <!-- script propios-->
   <!--<script src="<?php echo base_url(); ?>/assets/js/agregar_cotizacion.js"></script>-->
 </head>

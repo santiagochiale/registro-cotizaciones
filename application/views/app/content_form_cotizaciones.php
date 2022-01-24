@@ -199,7 +199,7 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Ok</button>
+                                <button type="submit" class="btn btn-primary">prueba</button>
                             </div>
                         </form>
                     </div>
@@ -384,9 +384,24 @@
     }
 
     function actualizarpreview(){
-
-
         let data = {};
+        let moneda_cotizacion = $('select#id_moneda_coti option:selected').text()
+        let moneda_presentacion = $('select#id_moneda_pres option:selected').text()
+
+        if(moneda_cotizacion=='USD'){
+            data.id_moneda_coti = '2'
+        }
+        if(moneda_cotizacion=='$'){
+            data.id_moneda_coti = '1'
+        }
+
+        if(moneda_presentacion=='USD'){
+            data.id_moneda_pres = '2'
+        }
+        if(moneda_presentacion=='$'){
+            data.id_moneda_pres = '1'
+        }
+
         data.cantidad = $('input#cantidad').val()
         data.precio_unitario = $('input#precio_unitario').val()
         data.costo = $('input#costo').val()
@@ -396,11 +411,14 @@
         data.moneda_presentacion = $('select#id_moneda_pres option:selected').text()
         data.valor_dolar = $('#valor_dolar').val()
 
+
         let ganador = $('select#id_empresas option:selected').text();
         $('span#span_ganador').text($('select#id_empresas').val()!=''?ganador:'-')
 
-        // console.log(data); return ;
+        //  console.log(data); return ;
         $.post("<?php echo base_url() ?>index.php/DevelAdmin/calcular_facturacion_costo", data, function(response){
+
+            
 
             $('span#span_facturacion').text(response.facturacion?response.facturacion:'-')
             $('span#span_costo_total').text(response.costo_total?response.costo_total:'-')
@@ -593,6 +611,7 @@
 
     //evento de submit de los datos del formulario de edición
     $('#formProductos').on('submit', function(e) {
+        console.log('submit formulario cotizaciones');
         //e.preventDefault();
         //{"modelo":"ProductosModel","valores":[{"id":"26","descripcion_producto":"tarjetas nuevas","id_grupo":"2","cod_sap":"0000"}]}
         //si el id va vacio va al metodo de inserción de registro nuevo, si no al de edicion
@@ -600,6 +619,7 @@
         //var valores = {};
 
         valoresSerArray = $(this).serializeArray(); //esto devuelve un array donde cada imdice es un objeto con la forma {name: value}. Name es el nombre del label y value el valor del campo
+        //console.log('serializaArray');
         //console.log(valoresSerArray);
 
 
@@ -617,7 +637,7 @@
                 //console.log(valor.name + ' ' + valor.value);
                 valores[valor.name] = valor.value;
             });
-            // console.log(valores);
+             console.log(valores);
             var jsonObj = new toJson('ProductosModel', null, valores);
 
             //console.log(JSON.stringify(jsonObj)); //en este punto esta listo el json para enviarse al controlador
