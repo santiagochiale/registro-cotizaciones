@@ -66,6 +66,7 @@ class DevelAdmin extends CI_Controller
           $data['cantidad_cotizaciones'] = $this->RegistroCotizacionesModel->traerCantidadCotizacionesDashboard($data['filtros']);
           $data['data_dashboard'] = $this->RegistroCotizacionesModel->traerDataDashboard($data['filtros']);
       }
+    //   echo '<pre>';print_r($data);echo '</pre>';die();
       $view["contenido"] = $this->load->view("app/content_home", $data, TRUE);;
     $view["titulo"] = "Pagina Principal";
     //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto

@@ -297,7 +297,7 @@ class RegistroCotizacionesModel extends MY_Model{
   public function traerDataDashboard($params = array()){
       $this->db->from('registro_cotizaciones rc')
           ->join('estado_cotizacion ec', 'rc.id_estado_coti = ec.id_estado_coti')
-          ->join('monedas m', 'rc.id_moneda_coti = m.id_moneda')
+          ->join('monedas m', 'rc.id_moneda_pres = m.id_moneda')
           ->select('m.moneda as moneda, estado_cotizacion as estado_cotizacion, sum(cantidad) as cantidad, sum(facturacion) as facturacion, round(sum(cmg_moneda),2) as cmg_moneda, rc.id_estado_coti, rc.id_moneda_coti')
           ->group_by('m.moneda, estado_cotizacion');
 
@@ -336,7 +336,7 @@ class RegistroCotizacionesModel extends MY_Model{
           foreach ($result as $data){
               $dataDashboard[$data['moneda']][$data['estado_cotizacion']] = $data + array('porcentaje'=>$this->calcularPorcentajeCotizaciones($data['id_moneda_coti'], $data['id_estado_coti'], $params));
           }
-//          var_dump($dataDashboard); exit;
+        //  var_dump($dataDashboard); exit;
           return $dataDashboard;
       }
   }

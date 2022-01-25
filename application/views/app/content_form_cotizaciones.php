@@ -199,7 +199,7 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">prueba</button>
+                                <button type="submit" class="btn btn-primary">ok</button>
                             </div>
                         </form>
                     </div>
