@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     You should have received a copy of the GNU General Public License
     along with Auth_Ldap.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 /**
@@ -34,7 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * login_attribute  - LDAP attribute used to check usernames against
  * proxy_user       - Distinguised name of a proxy user if your LDAP server does not allow anonymous binds
  * proxy pass       - Password to use with above
- * roles            - An array of role names to use within your app.  The values are arbitrary.  
+ * roles            - An array of role names to use within your app.  The values are arbitrary.
  *                      The keys themselves represent the
  *			"security level," ie
  *			if( $security_level >= 3 ) {
@@ -45,11 +45,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * auditlog         - Location to log auditable events.  Needs to be writeable
  *                      by the web server
  */
-		
+
 $config['ldap_uri'] = 'ldaps://192.168.184.7';
+//$config['ldap_uri'] = 'ldap://192.168.0.50';
 $config['portLDAP'] = 389;
-$config['use_tls'] = true; 
-$config['basedn'] = 'DC=unitecblue,Dc=com';
+$config['use_tls'] = true;
+$config['basedn'] = 'dc=unitecblue,dc=com';
 $config['use_ad'] = true;
 $config['ad_domain'] = 'unitecblue.com';
 $config['usernameldap'] = 'registroparadas_ldap';
@@ -57,9 +58,8 @@ $config['passwordldap'] = '5iente-634';
 $config['login_attribute'] = 'samaccountname';
 $config['proxy_user'] = '';
 $config['proxy_pass'] = '';
-$config['roles'] = array(1 => 'User', 
+$config['roles'] = array(1 => 'User',
     3 => 'Power User',
     5 => 'Administrator');
 $config['member_attribute'] = 'samaccountname';
 $config['auditlog'] = 'application/logs/audit.log';  // Some place to log attempted logins (separate from message log)
-

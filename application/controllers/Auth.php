@@ -44,65 +44,111 @@ class Auth extends CI_Controller {
     //
     
     function index() {
-        $data['error']="";
-        $this->logout($data);
+        if(!$this->auth_ldap->is_authenticated()) {
+            $this->login();
+        }
+        else{
+           
+            redirect('/DevelAdmin');
+        }
+
+//        $data['error']="";
+//        $this->logout($data);
     }
 
     function login($errorMsg = NULL){
         if(!$this->auth_ldap->is_authenticated()) {
-            // Set up rules for form validation
-            $rules = $this->form_validation;
-            $rules->set_rules('username', 'Username', 'required|regex_match[/[a-zA-ZñÑáéíóúÁÉÍÓÚ 0-9.]+$/]');
-            $rules->set_rules('password', 'Password', 'required');
 
-            // Do the login...
-            
-            $user_info = $this->auth_ldap->login($this->input->post('username'),$this->input->post('password'));
-            /*echo '<h1>Return ldap_login</h1><pre>';
-            echo $this->session->userdata('username');   
-            echo '</pre>';*/
-            if($rules->run() && $user_info['error']=="") {
-                // Login WIN!
-                $view["contenido"] = $this->load->view("admin/index", NULL, TRUE);
-                $view["titulo"] = "Pagina Principal";
-                //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
-                $this->parser->parse("template/body_admin",$view);
-                
-            }else {
-                //echo $user_info['error'];
-                // Login FAIL o primera vez que nos logueamos
-                $data['error'] = $user_info['error'];
-                $this->logout($data);
-                /*
-                $view["contenido"] = $this->load->view("admin/login", $data, TRUE);
-                //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
-                $this->parser->parse("template/body_login",$view);
-                */
+            if (!empty($this->input->post())){
+                // Set up rules for form validation
+                $rules = $this->form_validation;
+                //$rules->set_rules('username', 'Username', 'required|regex_match[/[a-zA-ZñÑáéíóúÁÉÍÓÚ 0-9.]+$/]');
+                $rules->set_rules('username', 'Username', 'required');
+                $rules->set_rules('password', 'Password', 'required');
 
+                // Do the login...
+
+                $user_info = $this->auth_ldap->login($this->input->post('username'),$this->input->post('password'));
+                /*echo '<h1>Return ldap_login</h1><pre>';
+                echo $this->session->userdata('username');
+                echo '</pre>';*/
+                if($rules->run() && $user_info['error']=="") {
+                    /*echo 'validación correcta';
+                    echo '<br>';
+                    echo 'user_info[error]:  ';
+                    echo $user_info['error'];
+                    echo '<br>';
+                    echo '<pre>';
+                    print_r($user_info);
+                    echo '</pre>';
+                    die();*/
+                    // Login WIN!
+//                    $view["contenido"] = null;
+//                    $view["titulo"] = "Pagina Principal";
+                    //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
+//                    $this->parser->parse("app/estructura_app",$view);
+                    //$this->load->view("app/estructura_app");
+                    //echo "autentificado"; die();
+                    redirect('/DevelAdmin');
+
+                }else {
+                    /*echo 'validación error';
+                    echo '<br>';
+                    echo 'user_info[error]:  ';
+                    echo $user_info['error'];
+                    echo '<br>';
+                    echo '<pre>';
+                    print_r($user_info);
+                    echo '</pre>';
+                    die();*/
+                    //echo $user_info['error'];
+                    // Login FAIL o primera vez que nos logueamos
+                    $view['error'] = $user_info['error'];
+//                    $this->logout($data);
+
+//                    $view["contenido"] = null;
+//                    //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
+//                    $this->parser->parse("app/estructura_app",$view);
+
+
+                }
             }
+
+            $view["contenido"] = null;
+            //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
+            $this->parser->parse("app/estructura_app",$view);
+
+
+
+
         }else {
-                // Already logged in...
-                $view["contenido"] = $this->load->view("admin/index", NULL, TRUE);
-                $view["titulo"] = "Pagina Principal";
-                //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
-                $this->parser->parse("template/body_admin",$view);
+            redirect('/DevelAdmin');
+//                // Already logged in...
+//                $view["contenido"] = null;
+//                $view["titulo"] = "Pagina Principal";
+//                //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
+//                $this->parser->parse("app/estructura_app",$view);
+
+                //$this->load->view("app/estructura_app");
         }
     }
 
     function logout($data= NULL) {
-        if($this->session->userdata('logged_in')) {
-            $data['name'] = $this->session->userdata('cn');
-            $data['username'] = $this->session->userdata('username');
-            $data['logged_in'] = TRUE;
-            $this->auth_ldap->logout();
-            $data['error'] = "";
-        } else {
-            $data['logged_in'] = FALSE;
-        }
-
-        $view["contenido"] = $this->load->view("admin/login", $data, TRUE);
-        //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
-        $this->parser->parse("template/body_login",$view);
+//        if($this->session->userdata('logged_in')) {
+//            $data['name'] = $this->session->userdata('cn');
+//            $data['username'] = $this->session->userdata('username');
+//            $data['logged_in'] = TRUE;
+//            $this->auth_ldap->logout();
+//            $data['error'] = "";
+//        } else {
+//            $data['logged_in'] = FALSE;
+//        }
+//
+//        $view["contenido"] = $this->load->view("admin/login", $data, TRUE);
+//        //el atributo TRUE indica que no se renderice la vista desde el load sino que lo cargue en la variable $view["contenido"] como texto
+//        $this->parser->parse("template/body_login",$view);
+        $this->session->sess_destroy();
+        redirect('/Auth');
     }
 }
 

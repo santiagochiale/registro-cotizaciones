@@ -23,8 +23,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/registro-cotizaciones';
 
+//$config['base_url'] = 'http://'.$_SERVER["SERVER_NAME"].'/registro-cotizaciones/';
+$config['base_url'] = 'http://192.168.92.95/registro-cotizaciones';
+//$config['base_url'] = 'http://localhost/registro-cotizaciones/';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -404,7 +406,7 @@ $config['cookie_prefix']	= '';
 $config['cookie_domain']	= '';
 $config['cookie_path']		= '/';
 $config['cookie_secure']	= FALSE;
-$config['cookie_httponly'] 	= FALSE;
+$config['cookie_httponly'] 	= TRUE;
 
 /*
 |--------------------------------------------------------------------------

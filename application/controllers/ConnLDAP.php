@@ -48,7 +48,8 @@ class ConnLDAP extends CI_Controller {
             if($ldapbind){
                 echo "El resultado de la vinculación es " . $ldapbind . "<br />";
 
-                $filter = '('.$this->login_attribute.'=schiale)';
+                //$filter = '('.$this->login_attribute.'=schiale)';
+                $filter = '';
                 $result= ldap_search($ldapconn, $this->basedn, $filter, array('dn', $this->login_attribute, 'cn'));
                 echo "El resultado de la búsqueda es " . $result . "<br />";
 
@@ -66,13 +67,13 @@ class ConnLDAP extends CI_Controller {
                 echo $bindDn;
                 // Now actually try to bind as the user
                 
-                $auth_result = ldap_bind($ldapconn, $bindDn, 'Proyecto2017');
+                //$auth_result = ldap_bind($ldapconn, $bindDn, 'Proyecto2017');
                 //echo $auth_result;
-                if ($auth_result) {
+                /*if ($auth_result) {
                     echo "Usuario autentificado!!!";
                 } else {
                     echo "Usuario incorrecto"; 
-                }
+                }*/
                 
                 echo "Cerando la conexión";
                 ldap_close($ldapconn);
